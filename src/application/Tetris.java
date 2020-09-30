@@ -1,5 +1,6 @@
 package application;
 
+import java.awt.GridLayout;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Timer;
@@ -18,34 +19,31 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
 public class Tetris extends Application {
 
-	//Vars
+	// Vars
 	public static final int MOVE = 25;
 	public static final int SIZE = 25;
-	public static int WIDTH = SIZE*12;
-	public static int HEIGHT = SIZE*24;
-	public static int [][] GRID = new int [WIDTH/SIZE][HEIGHT/SIZE];      //Creates the grid
-	private static Pane pane = new Pane();                                //Creates elements inside GameWindow
-	private static Form shape;                                            //Creates Tetris shapes
-	private static Scene GameWindow = new Scene(pane, WIDTH, HEIGHT+150); //Creates the window for the game
+	public static int WIDTH = SIZE * 12;
+	public static int HEIGHT = SIZE * 24;
+	public static int[][] GRID = new int[WIDTH / SIZE][HEIGHT / SIZE]; // Creates the grid
+	private static Pane pane = new Pane(); // Creates elements inside GameWindow
+	private static Form shape; // Creates Tetris shapes
+	private static Scene GameWindow = new Scene(pane, WIDTH, HEIGHT + 150); // Creates the window for the game
 	public static int Score = 0;
 	public static int OnTop = 0;
 	private static boolean Runtime = true;
 	private static Form NextShape = Controller.makeShape();
 	private static int BrokenLines = 0;
-	
-	
-	//Create game window
+
+	// Create game window
 	public static void main(String[] args) {
 		launch(args);
 	}
-	
-	
+
 	@Override
 	public void start(Stage stage) throws Exception {
-		for (int[] a: GRID) {
+		for (int[] a : GRID) {
 			Arrays.fill(a, 0);
 		}
 		Line line = new Line(0, 150, WIDTH, 150);
@@ -55,18 +53,17 @@ public class Tetris extends Application {
 		Text BrknLinesText = new Text("Lines broke: ");
 		ScoreText.setX(5);
 		ScoreText.setY(140);
-		pane.getChildren().addAll(line,ScoreText,BrknLinesText);
-		
+		pane.getChildren().addAll(line, ScoreText, BrknLinesText);
+
 		Form FirstBlock = NextShape;
 		pane.getChildren().addAll(FirstBlock.a, FirstBlock.b, FirstBlock.c, FirstBlock.d);
-		moveOnKeyPress(FirstBlock);
+		MoveOnKeyPress(FirstBlock);
 		shape = FirstBlock;
 		NextShape = Controller.makeShape();
 		stage.setScene(GameWindow);
 		stage.setTitle("Bootleg Tetris");
 		stage.show();
-		
-		
+
 		Timer FallingTime = new Timer();
 		TimerTask Task = new TimerTask() {
 			public void run() {
@@ -74,25 +71,24 @@ public class Tetris extends Application {
 					public void run() {
 						if (shape.a.getY() == 0 || shape.b.getY() == 0 || shape.c.getY() == 0 || shape.d.getY() == 0) {
 							OnTop++;
-						}
-						else {
+						} else {
 							OnTop = 0;
 						}
-						
-						//Game over
+
+						// Game over
 						if (OnTop == 2) {
 							Text GameOver = new Text("GAME OVER");
 							GameOver.setFill(Color.RED);
 							pane.getChildren().add(GameOver);
 							Runtime = false;
 						}
-						
-						//Exit game
+
+						// Exit game
 						if (OnTop == 15) {
 							System.exit(0);
 						}
-						
-						//Runtime
+
+						// Runtime
 						if (Runtime) {
 							MoveDown(shape);
 							ScoreText.setText("Score: " + Integer.toString(Score));
@@ -102,14 +98,15 @@ public class Tetris extends Application {
 				});
 			}
 		};
-		FallingTime.schedule(task, 0, 300);
+		FallingTime.schedule(Task, 0, 300);
 	}
-	
-	
-	//Detect key press and move shape (Currently use arrow keys, will try to add WASD later)
+
+	// Detect key press and move shape (Currently use arrow keys, will try to add
+	// WASD later)
 	private void MoveOnKeyPress(Form shape) {
 		GameWindow.setOnKeyPressed(new EventHandler<KeyEvent>() {
-			public void KeyPressedHandle(KeyEvent event) {
+			@Override
+			public void handle(KeyEvent event) {
 				switch (event.getCode()) {
 				case RIGHT:
 					Controller.MoveRight(shape);
@@ -127,9 +124,8 @@ public class Tetris extends Application {
 			}
 		});
 	}
-	
-	
-	//Rotate shape
+
+	// Rotate shape
 	private void MoveRotate(Form shape) {
 		int sh = shape.Rotation;
 		Rectangle a = shape.a;
@@ -187,7 +183,7 @@ public class Tetris extends Application {
 				break;
 			}
 			break;
-		
+
 		case "L":
 			if (sh == 1 && CheckShape(a, 1, -1) && CheckShape(c, 1, 1) && CheckShape(d, 2, 2)) {
 				MoveRight(shape.a);
@@ -238,9 +234,10 @@ public class Tetris extends Application {
 				break;
 			}
 			break;
-			
-		case "O": break;
-		
+
+		case "O":
+			break;
+
 		case "S":
 			if (sh == 1 && CheckShape(a, -1, -1) && CheckShape(c, -1, 1) && CheckShape(d, 0, 2)) {
 				MoveDown(shape.a);
@@ -283,7 +280,7 @@ public class Tetris extends Application {
 				break;
 			}
 			break;
-			
+
 		case "T":
 			if (sh == 1 && CheckShape(a, 1, 1) && CheckShape(c, -1, 1) && CheckShape(d, -1, -1)) {
 				MoveUp(shape.a);
@@ -326,7 +323,7 @@ public class Tetris extends Application {
 				break;
 			}
 			break;
-			
+
 		case "Z":
 			if (sh == 1 && CheckShape(b, 1, 1) && CheckShape(c, -1, 1) && CheckShape(d, -2, 0)) {
 				MoveUp(shape.b);
@@ -369,7 +366,7 @@ public class Tetris extends Application {
 				break;
 			}
 			break;
-			
+
 		case "I":
 			if (sh == 1 && CheckShape(a, 2, 2) && CheckShape(b, 1, 1) && CheckShape(d, -1, -1)) {
 				MoveUp(shape.a);
@@ -421,78 +418,75 @@ public class Tetris extends Application {
 			}
 			break;
 		}
-		
+
 	}
-	
-	
-	//Remove full lines and add points
+
+	// Remove full lines and add points
 	private void RemoveFullRows(Pane pane) {
-		//Stores elements in arrays
+		// Stores elements in arrays
 		ArrayList<Node> rects = new ArrayList<Node>();
 		ArrayList<Node> newRects = new ArrayList<Node>();
 		ArrayList<Integer> lines = new ArrayList<Integer>();
 		int FullLine = 0;
-		
-		//Check full line position
-		for (int y=0; y<GRID[0].length; y++) {
-			for (int x=0; x<GRID.length; x++) {
+
+		// Check full line position
+		for (int y = 0; y < GRID[0].length; y++) {
+			for (int x = 0; x < GRID.length; x++) {
 				if (GRID[x][y] == 1) {
 					FullLine++;
 				}
 			}
-			
+
 			if (FullLine == GRID.length) {
-				lines.add(x);
+				lines.add(y);
 			}
-			
+
 			FullLine = 0;
 		}
-		
-		//Remove full line and increase points
+
+		// Remove full line and increase points
 		if (lines.size() > 0) {
 			do {
-				for (Node node: pane.getChildren()) {
+				for (Node node : pane.getChildren()) {
 					if (node instanceof Rectangle) {
 						rects.add(node);
 					}
 				}
 				Score += 10;
 				BrokenLines++;
-				
-				//Remove lines
-				for (Node node: rects) {
-					Rectangle a = (Rectangle)node;
-					if (a.getY() == lines.get(0)*SIZE) {
-						GRID[(int)a.getX()/SIZE][(int)a.getY()/SIZE] = 0;
+
+				// Remove lines
+				for (Node node : rects) {
+					Rectangle a = (Rectangle) node;
+					if (a.getY() == lines.get(0) * SIZE) {
+						GRID[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 0;
 						pane.getChildren().remove(node);
-					}
-					else
+					} else
 						newRects.add(node);
 				}
-				
-				for (Node node: newRects) {
-					Rectangle a = (Rectangle)node;
-					if (a.getY() < lines.get(0)*SIZE) {
-						GRID[(int)a.getX()/SIZE][(int)a.getY()/SIZE] = 0;
+
+				for (Node node : newRects) {
+					Rectangle a = (Rectangle) node;
+					if (a.getY() < lines.get(0) * SIZE) {
+						GRID[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 0;
 						a.setY(a.getY() + SIZE);
 					}
 					lines.remove(0);
 					rects.clear();
 					newRects.clear();
-					
-					for (Node node: pane.getChildren()) {
+
+					for (Node node : pane.getChildren()) {
 						if (node instanceof Rectangle) {
 							rects.add(node);
 						}
 					}
-					
-					for (Node node: rects) {
-						Rectangle a = (Rectangle)node;
+
+					for (Node node : rects) {
+						Rectangle a = (Rectangle) node;
 						try {
-							GRID[(int)a.getX()/SIZE][(int)a.getY()/SIZE] = 1;
-						}
-						catch (ArrayIndexOutOfBoundsException e) {
-							
+							GRID[(int) a.getX() / SIZE][(int) a.getY() / SIZE] = 1;
+						} catch (ArrayIndexOutOfBoundsException e) {
+
 						}
 					}
 					rects.clear();
@@ -500,27 +494,97 @@ public class Tetris extends Application {
 			} while (lines.size() > 0);
 		}
 	}
-	
-	
-	//Check shape to rotate
+
+	// Check shape to rotate
 	private boolean CheckShape(Rectangle shape, int x, int y) {
 		boolean xBool = false;
 		boolean yBool = false;
-		if (x>=0) {
-			xBool = shape.getX() + x*MOVE <= WIDTH - SIZE;
+		if (x >= 0) {
+			xBool = shape.getX() + x * MOVE <= WIDTH - SIZE;
+		} else {
+			xBool = shape.getX() + x * MOVE >= 0;
 		}
-		else {
-			xBool = shape.getX() + x*MOVE >= 0;
+
+		if (y >= 0) {
+			yBool = shape.getY() + y * MOVE > 0;
+		} else {
+			yBool = shape.getY() + y * MOVE < HEIGHT - SIZE;
 		}
-		
-		if (y>=0) {
-			yBool = shape.getY() + y*MOVE > 0;
-		}
-		else {
-			yBool = shape.getY() + y*MOVE < HEIGHT - SIZE;
-		}
-		
-		return xBool && yBool && GRID[((int)shape.getX()/SIZE) + x][((int)shape.getY()/SIZE) - y] == 0;
+
+		return xBool && yBool && GRID[((int) shape.getX() / SIZE) + x][((int) shape.getY() / SIZE) - y] == 0;
 	}
 
+	// Move individual square
+	private void MoveUp(Rectangle rect) {
+		if (rect.getY() - MOVE > 0) {
+			rect.setY(rect.getY() - MOVE);
+		}
+	}
+
+	private void MoveDown(Rectangle rect) {
+		if (rect.getY() + MOVE > HEIGHT) {
+			rect.setY(rect.getY() + MOVE);
+		}
+	}
+
+	private void MoveLeft(Rectangle rect) {
+		if (rect.getX() - MOVE >= 0) {
+			rect.setY(rect.getY() - MOVE);
+		}
+	}
+
+	private void MoveRight(Rectangle rect) {
+		if (rect.getY() + MOVE < WIDTH - SIZE) {
+			rect.setY(rect.getY() + MOVE);
+		}
+	}
+
+	public void MoveDown(Form form) {
+		if (form.a.getY() == HEIGHT - SIZE || form.b.getY() == HEIGHT - SIZE || form.c.getY() == HEIGHT - SIZE
+				|| form.d.getY() == HEIGHT - SIZE || MoveA(form) || MoveB(form) || MoveC(form) || MoveD(form)) {
+			GRID[(int) form.a.getX() / SIZE][(int) form.a.getY() / SIZE] = 1;
+			GRID[(int) form.b.getX() / SIZE][(int) form.a.getY() / SIZE] = 1;
+			GRID[(int) form.c.getX() / SIZE][(int) form.a.getY() / SIZE] = 1;
+			GRID[(int) form.d.getX() / SIZE][(int) form.a.getY() / SIZE] = 1;
+			RemoveFullRows(pane);
+
+			// Create another shape
+			Form NextBlock = NextShape;
+			NextShape = Controller.makeShape();
+			shape = NextBlock;
+			pane.getChildren().addAll(NextBlock.a, NextBlock.b, NextBlock.c, NextBlock.d);
+			MoveOnKeyPress(NextBlock);
+		}
+
+		if (form.a.getY() + MOVE < HEIGHT && form.b.getY() + MOVE < HEIGHT && form.c.getY() + MOVE < HEIGHT
+				&& form.d.getY() + MOVE < HEIGHT) {
+			int DownA = GRID[(int) form.a.getX() / SIZE][(int) form.a.getY() / SIZE + 1];
+			int DownB = GRID[(int) form.a.getX() / SIZE][(int) form.a.getY() / SIZE + 1];
+			int DownC = GRID[(int) form.a.getX() / SIZE][(int) form.a.getY() / SIZE + 1];
+			int DownD = GRID[(int) form.a.getX() / SIZE][(int) form.a.getY() / SIZE + 1];
+
+			if (DownA == 0 && DownA == DownB && DownB == DownC && DownC == DownD) {
+				form.a.setY(form.a.getY() + MOVE);
+				form.b.setY(form.b.getY() + MOVE);
+				form.c.setY(form.c.getY() + MOVE);
+				form.d.setY(form.d.getY() + MOVE);
+			}
+		}
+	}
+
+	private boolean MoveA(Form form) {
+		return (GRID[(int) form.a.getX() / SIZE][(int) form.a.getY() / SIZE + 1] == 1);
+	}
+
+	private boolean MoveB(Form form) {
+		return (GRID[(int) form.b.getX() / SIZE][(int) form.b.getY() / SIZE + 1] == 1);
+	}
+
+	private boolean MoveC(Form form) {
+		return (GRID[(int) form.c.getX() / SIZE][(int) form.c.getY() / SIZE + 1] == 1);
+	}
+
+	private boolean MoveD(Form form) {
+		return (GRID[(int) form.d.getX() / SIZE][(int) form.d.getY() / SIZE + 1] == 1);
+	}
 }
