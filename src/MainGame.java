@@ -13,7 +13,11 @@ public class MainGame {
 		GridBoard Board = new GridBoard();
 		GameWindow.add(Board);
 		
+		GameWindow.addKeyListener(Board);
+		
 		GameWindow.setVisible(true);
+		
+		
 		
 	}
 	
