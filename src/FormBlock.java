@@ -36,25 +36,39 @@ public class FormBlock {
 		if (HitGround) {
 			for (int i=0; i<BlockCoordinates.length; i++) {
 				for (int j=0; j<BlockCoordinates[i].length; j++) {
-					if (BlockCoordinates[i][j] == 1) {
+					if (BlockCoordinates[i][j] != 0) {
 						GridBoard.getGrid()[i+y][j+x] = 1;
 					}
 				}
 			}
+		
 			GridBoard.SpawnNextBlock();
 		}
 		
-		if (y + BlockCoordinates.length < GridBoard.ROWS) {
+		
+		if (x + XShift + BlockCoordinates[0].length <= GridBoard.COLUMNS && x + XShift >= 0)
+			x += XShift;
+		XShift = 0;
+		
+		
+		if (y+BlockCoordinates.length+1 <= GridBoard.ROWS) {
+			for (int i=0; i<BlockCoordinates.length; i++) {
+				for (int j=0; j<BlockCoordinates[i].length; j++) { 
+					if (BlockCoordinates[i][j] != 0) {}
+					if (GridBoard.getGrid()[y + i + 1][j + x] != 0) {
+						HitGround = true;
+					}
+				}
+			}
 			if (CurrentTime > CurrentSpeed) {
 				y++;
 				CurrentTime = 0;
 			}
-		} else {
+		}
+		else {
 			HitGround = true;
 		}
-		if (x + XShift + BlockCoordinates[0].length <= GridBoard.COLUMNS && x + XShift >= 0)
-			x += XShift;
-		XShift = 0;
+		
 
 	}
 

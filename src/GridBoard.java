@@ -79,8 +79,8 @@ public class GridBoard extends JPanel implements KeyListener {
 
 		for (int x=0; x<GRID.length; x++) {
 			for (int y=0; y<GRID[x].length; y++) {
-				if (GRID[x][y] == 1) {
-					Draw.drawImage(Block0.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), x*BLOCKSIZE, y*BLOCKSIZE, null);
+				if (GRID[x][y] != 0) {
+					Draw.drawImage(Block0.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
 				}
 			}
 		}
