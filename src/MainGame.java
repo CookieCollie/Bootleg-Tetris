@@ -1,3 +1,5 @@
+import java.awt.Graphics;
+
 import javax.swing.*;
 
 public class MainGame {
@@ -5,7 +7,7 @@ public class MainGame {
 	
 	public MainGame() {
 		JFrame GameWindow = new JFrame("Bootleg Tetris");
-		GameWindow.setSize(WIDTH,HEIGHT);
+		GameWindow.setSize(WIDTH+100,HEIGHT);
 		GameWindow.setResizable(false);
 		GameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GameWindow.setLocationRelativeTo(null);
@@ -20,6 +22,7 @@ public class MainGame {
 		
 		
 	}
+	
 	
 	public static void main(String[] args) {
 		new MainGame();

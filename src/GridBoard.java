@@ -27,6 +27,7 @@ public class GridBoard extends JPanel implements KeyListener {
 	private int delay = 1000 / FPS;
 	private Timer GameLoop;
 	
+	private boolean gameOver = false;
 
 
 	public GridBoard() {
@@ -74,7 +75,9 @@ public class GridBoard extends JPanel implements KeyListener {
 
 	public void paintComponent(Graphics Draw) {
 		super.paintComponent(Draw);
-
+		
+		Draw.drawImage(Block1, 0, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS, 0, 0, 100, 100, null);
+		
 		CurrentShape.BlockRender(Draw);
 
 		for (int x=0; x<GRID.length; x++) {
@@ -91,6 +94,14 @@ public class GridBoard extends JPanel implements KeyListener {
 		for (int i = 0; i < COLUMNS; i++) {
 			Draw.drawLine(i * BLOCKSIZE, 0, i * BLOCKSIZE, ROWS * BLOCKSIZE);
 		}
+		
+		Draw.drawLine(BLOCKSIZE*COLUMNS, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS);
+		Draw.drawString("Score: ", BLOCKSIZE*COLUMNS+10, 20);
+		Draw.drawString("Level: ", BLOCKSIZE*COLUMNS+10, 40);
+		
+		Draw.drawRect(BLOCKSIZE*COLUMNS, 0, 100, BLOCKSIZE*ROWS/2);
+		Draw.drawString("Highest scores: ", BLOCKSIZE*COLUMNS+10, BLOCKSIZE*ROWS/2+20);
+		
 	}
 
 	public int GetBlockSize() {
@@ -102,9 +113,19 @@ public class GridBoard extends JPanel implements KeyListener {
 	}
 	
 	public void SpawnNextBlock() {
+		RandomNum = rand.nextInt(7);
 		FormBlock NextShape = new FormBlock(Shape[RandomNum].getBlockImg(), Shape[RandomNum].getBlockCoordinates(), this);
 		CurrentShape = NextShape;
-		RandomNum = rand.nextInt(7);
+		
+		for (int row=0; row<CurrentShape.getBlockCoordinates().length; row++) {
+			for (int col=0; col<CurrentShape.getBlockCoordinates()[row].length; col++) {
+				if (CurrentShape.getBlockCoordinates()[row][col] != 0) {
+					if (GRID[row][col+3]!=0) {
+						gameOver = true;
+					}
+				}
+			}
+		}
 	}
 
 	@Override
