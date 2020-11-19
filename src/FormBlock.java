@@ -25,7 +25,7 @@ public class FormBlock {
 		PassedTime = System.currentTimeMillis();
 		Speed = 600; // Implement speed/difficulty change in future
 					 // The smaller the number, the faster the blocks move
-		SpeedBoost = 10;
+		SpeedBoost = 90;
 		CurrentSpeed = Speed;
 	}
 
