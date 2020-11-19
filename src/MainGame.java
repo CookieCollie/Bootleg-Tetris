@@ -3,11 +3,12 @@ import java.awt.Graphics;
 import javax.swing.*;
 
 public class MainGame {
-	public static final int WIDTH = 315, HEIGHT = 635;
+	public static final int WIDTH = GridBoard.getCOLUMNS()*GridBoard.getBLOCKSIZE(), HEIGHT = GridBoard.getROWS()*GridBoard.getBLOCKSIZE()
+																					 + (GridBoard.getROWS()-1)*2;
 	
 	public MainGame() {
 		JFrame GameWindow = new JFrame("Bootleg Tetris");
-		GameWindow.setSize(WIDTH+100,HEIGHT);
+		GameWindow.setSize(WIDTH+120,HEIGHT);
 		GameWindow.setResizable(false);
 		GameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GameWindow.setLocationRelativeTo(null);

@@ -10,22 +10,24 @@ public class FormBlock {
 	private int XShift, x, y;
 	private long CurrentTime, PassedTime;
 	private int Speed, SpeedBoost, CurrentSpeed;
+	private int color;
 	
 	private boolean HitGround = false;
 
-	public FormBlock(Image BlockImg, int[][] BlockCoordinates, GridBoard GridBoard) {
+	public FormBlock(Image BlockImg, int[][] BlockCoordinates, GridBoard GridBoard, int color) {
 		this.BlockImg = BlockImg;
 		this.BlockCoordinates = BlockCoordinates;
 		this.GridBoard = GridBoard;
-
-		x = 6;
-		y = 0;
+		this.color = color;
+		
+		x = GridBoard.getCOLUMNS()/2-1;
+		y = -1;
 
 		CurrentTime = 0;
 		PassedTime = System.currentTimeMillis();
 		Speed = 600; // Implement speed/difficulty change in future
 					 // The smaller the number, the faster the blocks move
-		SpeedBoost = 90;
+		SpeedBoost = 100;
 		CurrentSpeed = Speed;
 	}
 
@@ -37,11 +39,11 @@ public class FormBlock {
 			for (int i=0; i<BlockCoordinates.length; i++) {
 				for (int j=0; j<BlockCoordinates[i].length; j++) {
 					if (BlockCoordinates[i][j] != 0) {
-						GridBoard.getGrid()[i+y][j+x] = 1;
+						GridBoard.getGrid()[i+y][j+x] = color;
 					}
 				}
 			}
-		
+			CheckLine();
 			GridBoard.SpawnNextBlock();
 		}
 		
@@ -54,9 +56,10 @@ public class FormBlock {
 		if (y+BlockCoordinates.length+1 <= GridBoard.ROWS) {
 			for (int i=0; i<BlockCoordinates.length; i++) {
 				for (int j=0; j<BlockCoordinates[i].length; j++) { 
-					if (BlockCoordinates[i][j] != 0) {}
-					if (GridBoard.getGrid()[y + i + 1][j + x] != 0) {
-						HitGround = true;
+					if (BlockCoordinates[i][j] != 0) {
+						if (GridBoard.getGrid()[y + i + 1][j + x] != 0) {
+							HitGround = true;
+						}
 					}
 				}
 			}
@@ -68,8 +71,23 @@ public class FormBlock {
 		else {
 			HitGround = true;
 		}
-		
-
+	}
+	
+	private void CheckLine() {
+		int height = GridBoard.getGrid().length - 1;
+		 for (int i=height; i>0; i--) {
+			 int count=0;
+			 for (int j=0; j<GridBoard.getGrid()[0].length; j++) {
+				 if (GridBoard.getGrid()[i][j] != 0) {
+					 count++;
+				 }
+				 GridBoard.getGrid()[height][j] = GridBoard.getGrid()[i][j];
+			 }
+			 
+			 if (count<GridBoard.getGrid()[0].length) {
+				 height--;
+			 }
+		 }
 	}
 
 	public void BlockRender(Graphics Render) {
@@ -116,12 +134,25 @@ public class FormBlock {
 	}
 	
 	public void RotateBlock() {
+		if (HitGround) {
+			return;
+		}
+		
 		int[][] RotatedMatrix;
 		RotatedMatrix = TransposeMatrix(BlockCoordinates);
 		RotatedMatrix = ReverseMatrix(RotatedMatrix);
 		if (x+RotatedMatrix[0].length > GridBoard.COLUMNS || y+RotatedMatrix.length > GridBoard.ROWS) {
 			return;
 		}
+		
+		for (int row=0; row<RotatedMatrix.length; row++) {
+			for (int col=0; col<RotatedMatrix[0].length; col++) {
+				if (GridBoard.getGrid()[row+y][col+x] != 0) {
+					return;
+				}
+			}
+		}
+		
 		BlockCoordinates = RotatedMatrix;
 	}
 
@@ -131,6 +162,10 @@ public class FormBlock {
 
 	public Image getBlockImg() {
 		return BlockImg;
+	}
+	
+	public int getColor() {
+		return color;
 	}
 	
 	
