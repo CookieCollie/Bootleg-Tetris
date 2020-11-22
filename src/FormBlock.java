@@ -25,11 +25,11 @@ public class FormBlock {
 //		y = -1;
 
         // Starting position
-        x = 4;
+        x = GridBoard.getCOLUMNS()/2-1;;
         y = 0;
 
 		CurrentTime = 0;
-		PassedTime = 0; //System.currentTimeMillis();
+		PassedTime = System.currentTimeMillis();
 		Speed = 600; // Implement speed/difficulty change in future
 					 // The smaller the number, the faster the blocks move
 		SpeedBoost = 60;
@@ -75,7 +75,7 @@ public class FormBlock {
 					if (BlockCoordinates[i][j] != 0) {
 						if (GridBoard.getGrid()[y + i + 1][j + x] != 0) {
 							HitGround = true;
-							CurrentSpeed = 10000;
+							CurrentSpeed = 999999;
 						}
 					}
 				}
