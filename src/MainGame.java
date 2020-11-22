@@ -10,32 +10,24 @@ public class MainGame {
 //	public static final int WIDTH = GridBoard.getCOLUMNS() * GridBoard.getBLOCKSIZE(),
 //			HEIGHT = GridBoard.getROWS() * GridBoard.getBLOCKSIZE() + (GridBoard.getROWS()+10) * 2;
 	public static final int WIDTH = 306, HEIGHT = 629;
+	
+	private static JMenuBar menuBar = new JMenuBar();;
+	private JMenu game = new JMenu("Game");
+	private JMenuItem menuItem = new JMenuItem("New game");
+	private static JFrame GameWindow = new JFrame("Bootleg Tetris");
 
 	public MainGame() {
-		JFrame GameWindow = new JFrame("Bootleg Tetris");
-		
 		GameWindow.setSize(WIDTH + 120, HEIGHT);
 		GameWindow.setResizable(false);
 		GameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		GameWindow.setLocationRelativeTo(null);
-		
-
-		// Where the GUI is created:
-		JMenuBar menuBar;
-		JMenu game;
-		JMenuItem menuItem;
-
-		// Create the menu bar.
-		menuBar = new JMenuBar();
 
 		// Build the first menu.
-		game = new JMenu("Game");
 		game.setMnemonic(KeyEvent.VK_F);
 		game.getAccessibleContext().setAccessibleDescription("File menu");
 		menuBar.add(game);
 
 		// JMenuItems show the menu items
-		menuItem = new JMenuItem("New game");
 		menuItem.setMnemonic(KeyEvent.VK_N);
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -61,6 +53,7 @@ public class MainGame {
 
 		// add menu bar to frame
 		GameWindow.setJMenuBar(menuBar);
+		GameWindow.add(PauseScreen.pauseScreen);
 		
 		GameWindow.setVisible(true);
 	}
