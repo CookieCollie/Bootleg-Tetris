@@ -4,15 +4,16 @@ import java.awt.image.BufferedImage;
 import javax.swing.*;
 
 public class FormBlock {
+
 	private int[][] BlockCoordinates;
 	private GridBoard GridBoard;
 	private Image BlockImg;
-	private int XShift, x, y;
+	private int XShift=0, x, y;
 	private long CurrentTime, PassedTime;
 	private int Speed, SpeedBoost, CurrentSpeed;
 	private int color;
 	
-	private boolean HitGround = false;
+	private boolean HitGround = false, moveX = true;
 
 	public FormBlock(Image BlockImg, int[][] BlockCoordinates, GridBoard GridBoard, int color) {
 		this.BlockImg = BlockImg;
@@ -20,8 +21,12 @@ public class FormBlock {
 		this.GridBoard = GridBoard;
 		this.color = color;
 		
-		x = GridBoard.getCOLUMNS()/2-1;
-		y = -1;
+//		x = GridBoard.getCOLUMNS()/2-1;
+//		y = -1;
+
+        // Starting position
+        x = 4;
+        y = 0;
 
 		CurrentTime = 0;
 		PassedTime = System.currentTimeMillis();
@@ -48,12 +53,23 @@ public class FormBlock {
 		}
 		
 		
-		if (x + XShift + BlockCoordinates[0].length <= GridBoard.COLUMNS && x + XShift >= 0)
-			x += XShift;
-		XShift = 0;
+		if (!(x + XShift + BlockCoordinates[0].length > 10) && !(x + XShift < 0)) { // 10 is Gridboard's column
+		    for (int row = 0; row < BlockCoordinates.length; row++) {
+                for (int col = 0; col < BlockCoordinates[row].length; col++) {
+                    if(BlockCoordinates[row][col] != 0){
+                        if(GridBoard.getGrid()[y + row][x + XShift + col] != 0){
+                            moveX = false;
+                        }
+                    }
+                }
+            }
+            if (moveX) {
+                x += XShift;
+            }
+		}
 		
 		
-		if (y+BlockCoordinates.length+1 <= GridBoard.ROWS) {
+		if (!(y+BlockCoordinates.length+1 > 20)) { // 20 is gridboard's row
 			for (int i=0; i<BlockCoordinates.length; i++) {
 				for (int j=0; j<BlockCoordinates[i].length; j++) { 
 					if (BlockCoordinates[i][j] != 0) {
@@ -71,6 +87,8 @@ public class FormBlock {
 		else {
 			HitGround = true;
 		}
+		XShift = 0;
+		moveX = true;
 	}
 	
 	private void CheckLine() {
@@ -142,10 +160,10 @@ public class FormBlock {
 			return;
 		}
 		
-		int[][] RotatedMatrix;
+		int[][] RotatedMatrix = null;
 		RotatedMatrix = TransposeMatrix(BlockCoordinates);
 		RotatedMatrix = ReverseMatrix(RotatedMatrix);
-		if (x+RotatedMatrix[0].length > GridBoard.COLUMNS || y+RotatedMatrix.length > GridBoard.ROWS) {
+		if (x+RotatedMatrix[0].length > 10 || y+RotatedMatrix.length > 20) { // 10 20 is gridboard's column and row
 			return;
 		}
 		

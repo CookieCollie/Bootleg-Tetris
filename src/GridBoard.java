@@ -13,8 +13,9 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class GridBoard extends JPanel implements KeyListener {
+
 	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6;
-	public static int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 20;
+	public final int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 29;
 	public int[][] GRID = new int[ROWS][COLUMNS];
 
 	private FormBlock[] Shape = new FormBlock[7];
@@ -23,7 +24,7 @@ public class GridBoard extends JPanel implements KeyListener {
 	private Random rand = new Random();
 	int RandomNum = rand.nextInt(7);
 
-	private int FPS = 1000;
+	private int FPS = 60;
 	private int delay = 1000 / FPS;
 	private Timer GameLoop;
 	
@@ -32,13 +33,13 @@ public class GridBoard extends JPanel implements KeyListener {
 
 	public GridBoard() {
 		try {
-			Block0 = ImageIO.read(new FileInputStream("resources/0.png"));
-			Block1 = ImageIO.read(new FileInputStream("resources/1.png"));
-			Block2 = ImageIO.read(new FileInputStream("resources/2.png"));
-			Block3 = ImageIO.read(new FileInputStream("resources/3.png"));
-			Block4 = ImageIO.read(new FileInputStream("resources/4.png"));
-			Block5 = ImageIO.read(new FileInputStream("resources/5.png"));
-			Block6 = ImageIO.read(new FileInputStream("resources/6.png"));
+			Block0 = ImageIO.read(GridBoard.class.getResourceAsStream("/0.png"));
+			Block1 = ImageIO.read(GridBoard.class.getResourceAsStream("/1.png"));
+			Block2 = ImageIO.read(GridBoard.class.getResourceAsStream("/2.png"));
+			Block3 = ImageIO.read(GridBoard.class.getResourceAsStream("/3.png"));
+			Block4 = ImageIO.read(GridBoard.class.getResourceAsStream("/4.png"));
+			Block5 = ImageIO.read(GridBoard.class.getResourceAsStream("/5.png"));
+			Block6 = ImageIO.read(GridBoard.class.getResourceAsStream("/6.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Error in printing blocks");
@@ -73,7 +74,9 @@ public class GridBoard extends JPanel implements KeyListener {
 		SpawnNextBlock();
 	}
 
+
 	public void paintComponent(Graphics Draw) {
+		BufferedImage[] Blocks = {Block0, Block1, Block2, Block3, Block4, Block5, Block6};
 		super.paintComponent(Draw);
 		
 		Draw.drawImage(Block1, 0, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS, 0, 0, 100, 100, null);
@@ -82,27 +85,27 @@ public class GridBoard extends JPanel implements KeyListener {
 
 		for (int x=0; x<GRID.length; x++) {
 			for (int y=0; y<GRID[x].length; y++) {
-				if (GRID[x][y] == 1) {
-					Draw.drawImage(Block0.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
+				if (GRID[x][y] != 0) {
+					Draw.drawImage((Blocks[GRID[x][y]-1]).getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
 				}
-				else if (GRID[x][y] == 2) {
-					Draw.drawImage(Block1.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-				}
-				else if (GRID[x][y] == 3) {
-					Draw.drawImage(Block2.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-				}
-				else if (GRID[x][y] == 4) {
-					Draw.drawImage(Block3.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-				}
-				else if (GRID[x][y] == 5) {
-					Draw.drawImage(Block4.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-				}
-				else if (GRID[x][y] == 6) {
-					Draw.drawImage(Block5.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-				}
-				else if (GRID[x][y] == 7) {
-					Draw.drawImage(Block6.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-				}
+//				else if (GRID[x][y] == 2) {
+//					Draw.drawImage(Block1.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
+//				}
+//				else if (GRID[x][y] == 3) {
+//					Draw.drawImage(Block2.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
+//				}
+//				else if (GRID[x][y] == 4) {
+//					Draw.drawImage(Block3.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
+//				}
+//				else if (GRID[x][y] == 5) {
+//					Draw.drawImage(Block4.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
+//				}
+//				else if (GRID[x][y] == 6) {
+//					Draw.drawImage(Block5.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
+//				}
+//				else if (GRID[x][y] == 7) {
+//					Draw.drawImage(Block6.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
+//				}
 			}
 		}
 		for (int i = 0; i < ROWS; i++) {
@@ -170,10 +173,10 @@ public class GridBoard extends JPanel implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			CurrentShape.RotateBlock();
 		}
-		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-			int i=0;
-			GameLoop.stop();
-		}
+//		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+//			int i=0;
+//			GameLoop.stop();
+//		}
 	}
 
 	@Override
@@ -187,15 +190,15 @@ public class GridBoard extends JPanel implements KeyListener {
 		return GRID;
 	}
 	
-	public static int getCOLUMNS() {
+	public int getCOLUMNS() {
 		return COLUMNS;
 	}
 	
-	public static int getROWS() {
+	public int getROWS() {
 		return ROWS;
 	}
 	
-	public static int getBLOCKSIZE() {
+	public int getBLOCKSIZE() {
 		return BLOCKSIZE;
 	}
 }

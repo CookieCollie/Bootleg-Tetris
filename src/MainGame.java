@@ -7,8 +7,9 @@ import javax.swing.*;
 
 public class MainGame {
 	public static boolean newGame = false;
-	public static final int WIDTH = GridBoard.getCOLUMNS() * GridBoard.getBLOCKSIZE(),
-			HEIGHT = GridBoard.getROWS() * GridBoard.getBLOCKSIZE() + (GridBoard.getROWS()+10) * 2;
+//	public static final int WIDTH = GridBoard.getCOLUMNS() * GridBoard.getBLOCKSIZE(),
+//			HEIGHT = GridBoard.getROWS() * GridBoard.getBLOCKSIZE() + (GridBoard.getROWS()+10) * 2;
+	public static final int WIDTH = 306, HEIGHT = 629;
 
 	public MainGame() {
 		JFrame GameWindow = new JFrame("Bootleg Tetris");
