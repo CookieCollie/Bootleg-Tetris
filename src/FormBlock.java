@@ -113,6 +113,10 @@ public class FormBlock {
 		CurrentSpeed = Speed;
 	}
 	
+	public void escapePress() {
+		
+	}
+	
 	private int[][] TransposeMatrix(int[][] matrix) {
 		int[][] TransposedMatrix = new int[matrix[0].length][matrix.length];
 		for (int x=0; x<matrix.length; x++) {

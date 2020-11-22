@@ -170,6 +170,10 @@ public class GridBoard extends JPanel implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			CurrentShape.RotateBlock();
 		}
+		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+			int i=0;
+			GameLoop.stop();
+		}
 	}
 
 	@Override
