@@ -1,5 +1,4 @@
-import java.awt.Graphics;
-import java.awt.Shape;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -15,8 +14,8 @@ import javax.swing.*;
 public class GridBoard extends JPanel implements KeyListener {
 
 	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6;
-	public final int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 29;
-	public int[][] GRID = new int[ROWS][COLUMNS];
+	private final int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 29;
+	private int[][] GRID = new int[ROWS][COLUMNS];
 
 	private FormBlock[] Shape = new FormBlock[7];
 	private FormBlock CurrentShape;
@@ -48,7 +47,7 @@ public class GridBoard extends JPanel implements KeyListener {
 		GameLoop = new Timer(delay, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				BlockUpdate();
+				blockUpdate();
 				repaint();
 			}
 		});
@@ -86,7 +85,7 @@ public class GridBoard extends JPanel implements KeyListener {
 		for (int x=0; x<GRID.length; x++) {
 			for (int y=0; y<GRID[x].length; y++) {
 				if (GRID[x][y] != 0) {
-					Draw.drawImage((Blocks[GRID[x][y]-1]).getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
+					Draw.drawImage((Blocks[GRID[x][y]-1]).getScaledInstance(BLOCKSIZE, BLOCKSIZE, Image.SCALE_SMOOTH), y*BLOCKSIZE, x*BLOCKSIZE, null);
 				}
 //				else if (GRID[x][y] == 2) {
 //					Draw.drawImage(Block1.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
@@ -129,7 +128,7 @@ public class GridBoard extends JPanel implements KeyListener {
 		return BLOCKSIZE;
 	}
 
-	public void BlockUpdate() {
+	public void blockUpdate() {
 		CurrentShape.BlockUpdate();
 		if (gameOver) {
 			GameLoop.stop();

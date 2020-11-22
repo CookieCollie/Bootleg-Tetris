@@ -29,10 +29,10 @@ public class FormBlock {
         y = 0;
 
 		CurrentTime = 0;
-		PassedTime = System.currentTimeMillis();
+		PassedTime = 0; //System.currentTimeMillis();
 		Speed = 600; // Implement speed/difficulty change in future
 					 // The smaller the number, the faster the blocks move
-		SpeedBoost = 100;
+		SpeedBoost = 60;
 		CurrentSpeed = Speed;
 	}
 
@@ -44,7 +44,7 @@ public class FormBlock {
 			for (int i=0; i<BlockCoordinates.length; i++) {
 				for (int j=0; j<BlockCoordinates[i].length; j++) {
 					if (BlockCoordinates[i][j] != 0) {
-						GridBoard.getGrid()[i+y][j+x] = color;
+						GridBoard.getGrid()[i+y][j+x] = this.color;
 					}
 				}
 			}
@@ -75,6 +75,7 @@ public class FormBlock {
 					if (BlockCoordinates[i][j] != 0) {
 						if (GridBoard.getGrid()[y + i + 1][j + x] != 0) {
 							HitGround = true;
+							CurrentSpeed = 10000;
 						}
 					}
 				}
@@ -83,8 +84,7 @@ public class FormBlock {
 				y++;
 				CurrentTime = 0;
 			}
-		}
-		else {
+		} else {
 			HitGround = true;
 		}
 		XShift = 0;
