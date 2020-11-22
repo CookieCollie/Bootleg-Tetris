@@ -116,7 +116,10 @@ public class GridBoard extends JPanel implements KeyListener {
 		}
 		
 		Draw.drawLine(BLOCKSIZE*COLUMNS, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS);
+
 		Draw.drawString("Score: ", BLOCKSIZE*COLUMNS+10, 20);
+		Draw.drawString(String.valueOf(FormBlock.getScoreFB()), BLOCKSIZE*COLUMNS+50, 20);
+
 		Draw.drawString("Level: ", BLOCKSIZE*COLUMNS+10, 40);
 		
 		Draw.drawRect(BLOCKSIZE*COLUMNS, 0, 120, BLOCKSIZE*ROWS/2);

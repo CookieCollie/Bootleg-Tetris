@@ -12,6 +12,8 @@ public class FormBlock {
 	private long CurrentTime, PassedTime;
 	private int Speed, SpeedBoost, CurrentSpeed;
 	private int color;
+
+	private static int scoreFB;
 	
 	private boolean HitGround = false, moveX = true;
 
@@ -100,8 +102,9 @@ public class FormBlock {
 					 count++;
 				 }
 				 GridBoard.getGrid()[height][j] = GridBoard.getGrid()[i][j];
+				 //System.out.print(GridBoard.getGrid()[height][j]);
 			 }
-			 
+			 if (count==10) scoreFB += 1;
 			 if (count<GridBoard.getGrid()[0].length) {
 				 height--;
 			 }
@@ -189,6 +192,8 @@ public class FormBlock {
 	public int getColor() {
 		return color;
 	}
-	
-	
+
+	public static int getScoreFB() {
+		return scoreFB;
+	}
 }
