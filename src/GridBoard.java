@@ -1,9 +1,11 @@
 import java.awt.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Random;
@@ -14,8 +16,10 @@ import javax.swing.*;
 public class GridBoard extends JPanel implements KeyListener {
 
 	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6;
-	private final int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 29;
-	private int[][] GRID = new int[ROWS][COLUMNS];
+
+	public final static int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 29;
+	public int[][] GRID = new int[ROWS][COLUMNS];
+	static Graphics Draw;
 
 	private FormBlock[] Shape = new FormBlock[7];
 	private FormBlock CurrentShape;
@@ -27,18 +31,26 @@ public class GridBoard extends JPanel implements KeyListener {
 	private int delay = 1000 / FPS;
 	private Timer GameLoop;
 	
-	private boolean gameOver = false;
+	private boolean gameOver = false, pause = false;
 
 
 	public GridBoard() {
 		try {
-			Block0 = ImageIO.read(GridBoard.class.getResourceAsStream("/0.png"));
+			Block0 = ImageIO.read(new File("resources/0.png"));
+			Block1 = ImageIO.read(new File("resources/1.png"));
+			Block2 = ImageIO.read(new File("resources/2.png"));
+			Block3 = ImageIO.read(new File("resources/3.png"));
+			Block4 = ImageIO.read(new File("resources/4.png"));
+			Block5 = ImageIO.read(new File("resources/5.png"));
+			Block6 = ImageIO.read(new File("resources/6.png"));
+			
+			/*Block0 = ImageIO.read(GridBoard.class.getResourceAsStream("/0.png"));
 			Block1 = ImageIO.read(GridBoard.class.getResourceAsStream("/1.png"));
 			Block2 = ImageIO.read(GridBoard.class.getResourceAsStream("/2.png"));
 			Block3 = ImageIO.read(GridBoard.class.getResourceAsStream("/3.png"));
 			Block4 = ImageIO.read(GridBoard.class.getResourceAsStream("/4.png"));
 			Block5 = ImageIO.read(GridBoard.class.getResourceAsStream("/5.png"));
-			Block6 = ImageIO.read(GridBoard.class.getResourceAsStream("/6.png"));
+			Block6 = ImageIO.read(GridBoard.class.getResourceAsStream("/6.png"));*/
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Error in printing blocks");
@@ -74,11 +86,12 @@ public class GridBoard extends JPanel implements KeyListener {
 	}
 
 
-	public void paintComponent(Graphics Draw) {
+	public void paintComponent(Graphics g) {
+		Draw = g;
 		BufferedImage[] Blocks = {Block0, Block1, Block2, Block3, Block4, Block5, Block6};
 		super.paintComponent(Draw);
 		
-		Draw.drawImage(Block1, 0, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS, 0, 0, 100, 100, null);
+		//Draw.drawImage(Block1, 0, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS, 0, 0, 100, 100, null);
 		
 		CurrentShape.BlockRender(Draw);
 
@@ -115,6 +128,10 @@ public class GridBoard extends JPanel implements KeyListener {
 			Draw.drawLine(i * BLOCKSIZE, 0, i * BLOCKSIZE, ROWS * BLOCKSIZE);
 		}
 		
+		if (pause) {
+			Draw.drawImage(Block5, 0, 0, 100, 100, 0, 0, 100, 100, null);
+		}
+		
 		Draw.drawLine(BLOCKSIZE*COLUMNS, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS);
 
 		Draw.drawString("Score: ", BLOCKSIZE*COLUMNS+10, 20);
@@ -125,10 +142,11 @@ public class GridBoard extends JPanel implements KeyListener {
 		Draw.drawRect(BLOCKSIZE*COLUMNS, 0, 120, BLOCKSIZE*ROWS/2);
 		Draw.drawString("Highest scores: ", BLOCKSIZE*COLUMNS+10, BLOCKSIZE*ROWS/2+20);
 		
-	}
-
-	public int GetBlockSize() {
-		return BLOCKSIZE;
+		
+		//PauseScreen.drawPauseScreen();
+		
+			
+		
 	}
 
 	public void blockUpdate() {
@@ -175,10 +193,17 @@ public class GridBoard extends JPanel implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			CurrentShape.RotateBlock();
 		}
-//		if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-//			int i=0;
-//			GameLoop.stop();
-//		}
+		if (e.getKeyCode() == KeyEvent.VK_P) {
+			pause = !pause;
+			if (pause) {
+				PauseScreen.drawPauseScreen();
+				GameLoop.stop();
+			}
+			else {
+				PauseScreen.removePauseScreen();
+				GameLoop.start();
+			}
+		}
 	}
 
 	@Override
@@ -192,15 +217,15 @@ public class GridBoard extends JPanel implements KeyListener {
 		return GRID;
 	}
 	
-	public int getCOLUMNS() {
+	public static int getCOLUMNS() {
 		return COLUMNS;
 	}
 	
-	public int getROWS() {
+	public static int getROWS() {
 		return ROWS;
 	}
 	
-	public int getBLOCKSIZE() {
+	public static int getBLOCKSIZE() {
 		return BLOCKSIZE;
 	}
 }

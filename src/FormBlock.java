@@ -27,11 +27,11 @@ public class FormBlock {
 //		y = -1;
 
         // Starting position
-        x = 4;
+        x = GridBoard.getCOLUMNS()/2-1;;
         y = 0;
 
 		CurrentTime = 0;
-		PassedTime = 0; //System.currentTimeMillis();
+		PassedTime = System.currentTimeMillis();
 		Speed = 600; // Implement speed/difficulty change in future
 					 // The smaller the number, the faster the blocks move
 		SpeedBoost = 60;
@@ -71,13 +71,13 @@ public class FormBlock {
 		}
 		
 		
-		if (!(y+BlockCoordinates.length+1 > 20)) { // 20 is gridboard's row
+		if (!(y+BlockCoordinates.length+1 > GridBoard.ROWS)) { // 20 is gridboard's row
 			for (int i=0; i<BlockCoordinates.length; i++) {
 				for (int j=0; j<BlockCoordinates[i].length; j++) { 
 					if (BlockCoordinates[i][j] != 0) {
 						if (GridBoard.getGrid()[y + i + 1][j + x] != 0) {
 							HitGround = true;
-							CurrentSpeed = 10000;
+							CurrentSpeed = 999999;
 						}
 					}
 				}
@@ -115,8 +115,8 @@ public class FormBlock {
 		for (int j = 0; j < BlockCoordinates.length; j++) {
 			for (int i = 0; i < BlockCoordinates[j].length; i++) {
 				if (BlockCoordinates[j][i] != 0) {
-					Render.drawImage(BlockImg, i * GridBoard.GetBlockSize() + x * GridBoard.GetBlockSize(),
-							j * GridBoard.GetBlockSize() + y * GridBoard.GetBlockSize(), null);
+					Render.drawImage(BlockImg, i * GridBoard.getBLOCKSIZE() + x * GridBoard.getBLOCKSIZE(),
+							j * GridBoard.getBLOCKSIZE() + y * GridBoard.getBLOCKSIZE(), null);
 				}
 			}
 		}
@@ -133,10 +133,7 @@ public class FormBlock {
 	public void KeyDownReleased() {
 		CurrentSpeed = Speed;
 	}
-	
-	public void escapePress() {
-		
-	}
+
 	
 	private int[][] TransposeMatrix(int[][] matrix) {
 		int[][] TransposedMatrix = new int[matrix[0].length][matrix.length];
