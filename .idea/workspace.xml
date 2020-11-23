@@ -19,10 +19,9 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="db0c011f-4f45-4610-bfb1-0cd0cfafec8a" name="Default Changelist" comment="Fixed attached-block bug by slowing down block">
+    <list default="true" id="db0c011f-4f45-4610-bfb1-0cd0cfafec8a" name="Default Changelist" comment="Adding score in line 107 FormBlock">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/FormBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FormBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GridBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GridBoard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +75,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606051968180</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Adding score in line 107 FormBlock">
+      <created>1606085412770</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1606085412771</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -94,7 +100,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Trying to fix attach-block bug, but fail" />
     <MESSAGE value="Fixed attached-block bug by slowing down block" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed attached-block bug by slowing down block" />
+    <MESSAGE value="Adding score in line 107 FormBlock" />
+    <option name="LAST_COMMIT_MESSAGE" value="Adding score in line 107 FormBlock" />
   </component>
   <component name="WindowStateProjectService">
     <state x="163" y="0" key="#Project_Structure" timestamp="1606033107119">
@@ -113,22 +120,22 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="463" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1606033758261" />
-    <state width="1322" height="128" key="GridCell.Tab.0.bottom" timestamp="1606084809052">
+    <state width="1322" height="128" key="GridCell.Tab.0.bottom" timestamp="1606095725001">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="128" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1606084809052" />
-    <state width="1322" height="128" key="GridCell.Tab.0.center" timestamp="1606084809052">
+    <state width="1322" height="128" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1606095725001" />
+    <state width="1322" height="128" key="GridCell.Tab.0.center" timestamp="1606095725001">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="128" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1606084809052" />
-    <state width="1322" height="128" key="GridCell.Tab.0.left" timestamp="1606084809052">
+    <state width="1322" height="128" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1606095725001" />
+    <state width="1322" height="128" key="GridCell.Tab.0.left" timestamp="1606095725001">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="128" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1606084809052" />
-    <state width="1322" height="128" key="GridCell.Tab.0.right" timestamp="1606084809052">
+    <state width="1322" height="128" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1606095725001" />
+    <state width="1322" height="128" key="GridCell.Tab.0.right" timestamp="1606095725001">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="128" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1606084809052" />
+    <state width="1322" height="128" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1606095725001" />
     <state width="1322" height="234" key="GridCell.Tab.1.bottom" timestamp="1606061086738">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
