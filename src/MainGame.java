@@ -31,7 +31,7 @@ public class MainGame {
 		menuItem.setMnemonic(KeyEvent.VK_N);
 		menuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GridBoard Board = new GridBoard();
+				GridBoard Board = GridBoard.getInstance();
 				GameWindow.add(Board);
 				GameWindow.addKeyListener(Board);
 				menuBar.remove(0);

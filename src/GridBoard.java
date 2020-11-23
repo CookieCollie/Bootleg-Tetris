@@ -17,7 +17,7 @@ public class GridBoard extends JPanel implements KeyListener {
 
 	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6;
 
-	public final static int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 29;
+	public final static int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 30;
 	public int[][] GRID = new int[ROWS][COLUMNS];
 	static Graphics Draw;
 
@@ -32,9 +32,10 @@ public class GridBoard extends JPanel implements KeyListener {
 	private Timer GameLoop;
 	
 	private boolean gameOver = false, pause = false;
+	
+	private static GridBoard boardSingle = null;
 
-
-	public GridBoard() {
+	private GridBoard() {
 		try {
 			Block0 = ImageIO.read(new File("resources/0.png"));
 			Block1 = ImageIO.read(new File("resources/1.png"));
@@ -83,6 +84,14 @@ public class GridBoard extends JPanel implements KeyListener {
 				new int[][] { { 1, 1, 1 }, { 0, 1, 0 } }, this, 7); // T
 
 		SpawnNextBlock();
+	}
+	
+	public static GridBoard getInstance() {
+		if (boardSingle == null) {
+			boardSingle = new GridBoard();
+		}
+		
+		return boardSingle;
 	}
 
 
@@ -205,9 +214,9 @@ public class GridBoard extends JPanel implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		/*if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			CurrentShape.KeyDownReleased();
-		}
+		}*/
 	}
 	
 	public int[][] getGrid() {
