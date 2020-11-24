@@ -21,7 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="db0c011f-4f45-4610-bfb1-0cd0cfafec8a" name="Default Changelist" comment="Adding score in line 107 FormBlock">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/FormBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FormBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GridBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GridBoard.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +38,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../TetrisGame" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -112,14 +112,18 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="134" y="0" width="1092" height="768" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.768@0.0.1366.768" timestamp="1606033362545" />
+    <state x="146" y="90" key="#com.intellij.ide.util.MemberChooser" timestamp="1606215841358">
+      <screen x="0" y="0" width="1366" height="768" />
+    </state>
+    <state x="146" y="90" key="#com.intellij.ide.util.MemberChooser/0.0.1366.768@0.0.1366.768" timestamp="1606215841358" />
     <state x="409" y="173" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1606032790335">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state x="409" y="173" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1366.768@0.0.1366.768" timestamp="1606032790335" />
-    <state x="463" y="138" key="FileChooserDialogImpl" timestamp="1606033758261">
+    <state x="463" y="138" key="FileChooserDialogImpl" timestamp="1606215039365">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="463" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1606033758261" />
+    <state x="463" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1606215039365" />
     <state width="1237" height="166" key="GridCell.Tab.0.bottom" timestamp="1606186733120">
       <screen x="0" y="0" width="1280" height="689" />
     </state>
@@ -156,10 +160,10 @@
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1322" height="234" key="GridCell.Tab.1.right/0.0.1366.768@0.0.1366.768" timestamp="1606061086738" />
-    <state x="163" y="0" key="SettingsEditor" timestamp="1606038124249">
+    <state x="163" y="0" key="SettingsEditor" timestamp="1606215558013">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state x="163" y="0" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1606038124249" />
+    <state x="163" y="0" key="SettingsEditor/0.0.1366.768@0.0.1366.768" timestamp="1606215558013" />
     <state x="0" y="116" key="Vcs.Push.Dialog.v2" timestamp="1606041272334">
       <screen x="0" y="0" width="1366" height="768" />
     </state>

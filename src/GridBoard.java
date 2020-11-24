@@ -15,7 +15,7 @@ import javax.swing.*;
 
 public class GridBoard extends JPanel implements KeyListener {
 
-	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6;
+	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6, blocks;
 
 	public final static int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 30;
 	public int[][] GRID = new int[ROWS][COLUMNS];
@@ -37,13 +37,13 @@ public class GridBoard extends JPanel implements KeyListener {
 
 	private GridBoard() {
 		try {
-			Block0 = ImageIO.read(new File("resources/0.png"));
-			Block1 = ImageIO.read(new File("resources/1.png"));
-			Block2 = ImageIO.read(new File("resources/2.png"));
-			Block3 = ImageIO.read(new File("resources/3.png"));
-			Block4 = ImageIO.read(new File("resources/4.png"));
-			Block5 = ImageIO.read(new File("resources/5.png"));
-			Block6 = ImageIO.read(new File("resources/6.png"));
+//			Block0 = ImageIO.read(new File("resources/0.png"));
+//			Block1 = ImageIO.read(new File("resources/1.png"));
+//			Block2 = ImageIO.read(new File("resources/2.png"));
+//			Block3 = ImageIO.read(new File("resources/3.png"));
+//			Block4 = ImageIO.read(new File("resources/4.png"));
+//			Block5 = ImageIO.read(new File("resources/5.png"));
+//			Block6 = ImageIO.read(new File("resources/6.png"));
 			
 			/*Block0 = ImageIO.read(GridBoard.class.getResourceAsStream("/0.png"));
 			Block1 = ImageIO.read(GridBoard.class.getResourceAsStream("/1.png"));
@@ -52,6 +52,10 @@ public class GridBoard extends JPanel implements KeyListener {
 			Block4 = ImageIO.read(GridBoard.class.getResourceAsStream("/4.png"));
 			Block5 = ImageIO.read(GridBoard.class.getResourceAsStream("/5.png"));
 			Block6 = ImageIO.read(GridBoard.class.getResourceAsStream("/6.png"));*/
+
+			// Test
+			blocks = ImageIO.read(GridBoard.class.getResourceAsStream("/testColor.png"));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Error in printing blocks");
@@ -68,20 +72,42 @@ public class GridBoard extends JPanel implements KeyListener {
 		GameLoop.start();
 
 		// Shapes
-		Shape[0] = new FormBlock(Block0.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), new int[][] { { 1, 1, 1, 1 } },
-				this, 1); // I
-		Shape[1] = new FormBlock(Block1.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), new int[][] { { 1, 1 }, { 1, 1 } },
-				this, 2); // O
-		Shape[2] = new FormBlock(Block2.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
-				new int[][] { { 0, 0, 1 }, { 1, 1, 1 } }, this, 3); // L
-		Shape[3] = new FormBlock(Block3.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
-				new int[][] { { 1, 1, 1 }, { 0, 0, 1 } }, this, 4); // J
-		Shape[4] = new FormBlock(Block4.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
-				new int[][] { { 0, 1, 1 }, { 1, 1, 0 } }, this, 5); // S
-		Shape[5] = new FormBlock(Block5.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
-				new int[][] { { 1, 1, 0 }, { 0, 1, 1 } }, this, 6); // Z
-		Shape[6] = new FormBlock(Block6.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
-				new int[][] { { 1, 1, 1 }, { 0, 1, 0 } }, this, 7); // T
+//		Shape[0] = new FormBlock(Block0.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), new int[][] { { 1, 1, 1, 1 } },
+//				this, 1); // I
+//		Shape[1] = new FormBlock(Block1.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), new int[][] { { 1, 1 }, { 1, 1 } },
+//				this, 2); // O
+//		Shape[2] = new FormBlock(Block2.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
+//				new int[][] { { 0, 0, 1 }, { 1, 1, 1 } }, this, 3); // L
+//		Shape[3] = new FormBlock(Block3.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
+//				new int[][] { { 1, 1, 1 }, { 0, 0, 1 } }, this, 4); // J
+//		Shape[4] = new FormBlock(Block4.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
+//				new int[][] { { 0, 1, 1 }, { 1, 1, 0 } }, this, 5); // S
+//		Shape[5] = new FormBlock(Block5.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
+//				new int[][] { { 1, 1, 0 }, { 0, 1, 1 } }, this, 6); // Z
+//		Shape[6] = new FormBlock(Block6.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
+//				new int[][] { { 1, 1, 1 }, { 0, 1, 0 } }, this, 7); // T
+
+		Shape[0] = new FormBlock(blocks.getSubimage(0, 0, BLOCKSIZE, BLOCKSIZE), new int[][] { { 1, 1, 1, 1 } // I shape
+		}, this, 1);
+		Shape[1] = new FormBlock(blocks.getSubimage(BLOCKSIZE, 0, BLOCKSIZE, BLOCKSIZE),
+				new int[][] { { 1, 1, 0 }, { 0, 1, 1 } // Z shape
+				}, this, 2);
+		Shape[2] = new FormBlock(blocks.getSubimage(BLOCKSIZE * 2, 0, BLOCKSIZE, BLOCKSIZE),
+				new int[][] { { 0, 1, 1 }, { 1, 1, 0 } // S shape
+				}, this, 3);
+		Shape[3] = new FormBlock(blocks.getSubimage(BLOCKSIZE * 3, 0, BLOCKSIZE, BLOCKSIZE),
+				new int[][] { { 1, 1, 1 }, { 0, 0, 1 } // J shape
+				}, this, 4);
+		Shape[4] = new FormBlock(blocks.getSubimage(BLOCKSIZE * 4, 0, BLOCKSIZE, BLOCKSIZE),
+				new int[][] { { 1, 1, 1 }, { 1, 0, 0 } // L shape
+				}, this, 5);
+		Shape[5] = new FormBlock(blocks.getSubimage(BLOCKSIZE * 5, 0, BLOCKSIZE, BLOCKSIZE),
+				new int[][] { { 1, 1, 1 }, { 0, 1, 0 } // T shape
+				}, this, 6);
+		Shape[6] = new FormBlock(blocks.getSubimage(BLOCKSIZE * 6, 0, BLOCKSIZE, BLOCKSIZE),
+				new int[][] { { 1, 1 }, { 1, 1 } // O shape
+				}, this, 7);
+
 
 		SpawnNextBlock();
 	}
@@ -107,7 +133,10 @@ public class GridBoard extends JPanel implements KeyListener {
 		for (int x=0; x<GRID.length; x++) {
 			for (int y=0; y<GRID[x].length; y++) {
 				if (GRID[x][y] != 0) {
-					Draw.drawImage((Blocks[GRID[x][y]-1]).getScaledInstance(BLOCKSIZE, BLOCKSIZE, Image.SCALE_SMOOTH), y*BLOCKSIZE, x*BLOCKSIZE, null);
+					//Draw.drawImage((Blocks[GRID[x][y]-1]).getScaledInstance(BLOCKSIZE, BLOCKSIZE, Image.SCALE_SMOOTH), y*BLOCKSIZE, x*BLOCKSIZE, null);
+
+					//Test
+					Draw.drawImage(blocks.getSubimage((GRID[x][y] - 1)*BLOCKSIZE, 0, BLOCKSIZE, BLOCKSIZE), y*BLOCKSIZE, BLOCKSIZE*x, null);
 				}
 //				else if (GRID[x][y] == 2) {
 //					Draw.drawImage(Block1.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
