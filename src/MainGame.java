@@ -9,11 +9,11 @@ public class MainGame {
 	public static boolean newGame = false;
 //	public static final int WIDTH = GridBoard.getCOLUMNS() * GridBoard.getBLOCKSIZE(),
 //			HEIGHT = GridBoard.getROWS() * GridBoard.getBLOCKSIZE() + (GridBoard.getROWS()+10) * 2;
-	public static final int WIDTH = 306, HEIGHT = 629;
+	public static final int WIDTH = 306, HEIGHT = 639;
 	
 	private static JMenuBar menuBar = new JMenuBar();;
 	private JMenu game = new JMenu("Game");
-	private JMenuItem menuItem = new JMenuItem("New game");
+	private JMenuItem gameItem = new JMenuItem("New game");
 	private static JFrame GameWindow = new JFrame("Bootleg Tetris");
 
 	public MainGame() {
@@ -23,33 +23,88 @@ public class MainGame {
 		GameWindow.setLocationRelativeTo(null);
 
 		// Build the first menu.
-		game.setMnemonic(KeyEvent.VK_F);
-		game.getAccessibleContext().setAccessibleDescription("File menu");
 		menuBar.add(game);
 
-		// JMenuItems show the menu items
-		menuItem.setMnemonic(KeyEvent.VK_N);
-		menuItem.addActionListener(new ActionListener() {
+		// JgameItems show the menu items
+		gameItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				GridBoard Board = GridBoard.getInstance();
 				GameWindow.add(Board);
 				GameWindow.addKeyListener(Board);
-				menuBar.remove(0);
+				//menuBar.remove(0);
 				menuBar.revalidate();
 			}
 		});
-		game.add(menuItem);
+		game.add(gameItem);
 
 		// add a separator
 		game.addSeparator();
 
-		menuItem = new JMenuItem("Pause", new ImageIcon("images/pause.gif"));
-		menuItem.setMnemonic(KeyEvent.VK_P);
-		game.add(menuItem);
+		gameItem = new JMenuItem("Pause");
+		gameItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean pause = GridBoard.getPause();
+				pause = !pause;
+				GridBoard.setPause(pause);
+				
+				if (pause) {
+					PauseScreen.drawPauseScreen();
+					GridBoard.getGameLoop().stop();
+				}
+				else {
+					PauseScreen.removePauseScreen();
+					GridBoard.getGameLoop().start();
+				}
+			}
+		});
+		game.add(gameItem);
 
-		menuItem = new JMenuItem("Exit", new ImageIcon("images/exit.gif"));
-		menuItem.setMnemonic(KeyEvent.VK_E);
-		game.add(menuItem);
+		gameItem = new JMenuItem("Exit");
+		gameItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		game.add(gameItem);
+		
+		
+		game = new JMenu("Difficulty");
+		menuBar.add(game);
+		
+		gameItem = new JMenuItem("Easy");
+		gameItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Difficulty.setDifficulty(0);
+				//FormBlock.setSpeed(Difficulty.changeDifficulty());
+				FormBlock.setCurrentSpeed(Difficulty.changeDifficulty());
+			}
+		});
+		game.add(gameItem);
+		
+		gameItem = new JMenuItem("Medium");
+		gameItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Difficulty.setDifficulty(1);
+				//FormBlock.setSpeed(Difficulty.changeDifficulty());
+				FormBlock.setCurrentSpeed(Difficulty.changeDifficulty());
+			}
+		});
+		game.add(gameItem);
+		
+		gameItem = new JMenuItem("Hard");
+		gameItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Difficulty.setDifficulty(2);
+				//FormBlock.setSpeed(Difficulty.changeDifficulty());
+				FormBlock.setCurrentSpeed(Difficulty.changeDifficulty());
+			}
+		});
+		game.add(gameItem);
 
 		// add menu bar to frame
 		GameWindow.setJMenuBar(menuBar);

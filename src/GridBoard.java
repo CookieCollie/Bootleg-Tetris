@@ -29,9 +29,9 @@ public class GridBoard extends JPanel implements KeyListener {
 
 	private int FPS = 60;
 	private int delay = 1000 / FPS;
-	private Timer GameLoop;
+	private static Timer GameLoop;
 	
-	private boolean gameOver = false, pause = false, gridOn = false;
+	private static boolean gameOver = false, pause = false, gridOn = true;
 	
 	private static GridBoard boardSingle = null;
 
@@ -159,10 +159,9 @@ public class GridBoard extends JPanel implements KeyListener {
 		
 		Draw.drawLine(BLOCKSIZE*COLUMNS, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS);
 
-		Draw.drawString("Score: ", BLOCKSIZE*COLUMNS+10, 20);
-		Draw.drawString(String.valueOf(FormBlock.getScoreFB()), BLOCKSIZE*COLUMNS+50, 20);
+		Draw.drawString("Score: " + FormBlock.getScoreFB(), BLOCKSIZE*COLUMNS+10, 20); //Draw score
 
-		Draw.drawString("Level: ", BLOCKSIZE*COLUMNS+10, 40);
+		Draw.drawString("Difficulty: " + Difficulty.getPrintDiff(), BLOCKSIZE*COLUMNS+10, 40);
 		
 		Draw.drawRect(BLOCKSIZE*COLUMNS, 0, 120, BLOCKSIZE*ROWS/2);
 		Draw.drawString("Highest scores: ", BLOCKSIZE*COLUMNS+10, BLOCKSIZE*ROWS/2+20);
@@ -255,6 +254,18 @@ public class GridBoard extends JPanel implements KeyListener {
 	
 	public static int getBLOCKSIZE() {
 		return BLOCKSIZE;
+	}
+	
+	public static boolean getPause() {
+		return pause;
+	}
+	
+	public static void setPause(boolean pause) {
+		GridBoard.pause = pause;
+	}
+	
+	public static Timer getGameLoop() {
+		return GameLoop;
 	}
 }
 

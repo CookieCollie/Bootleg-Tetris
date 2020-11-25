@@ -10,10 +10,8 @@ import javax.swing.JLabel;
 public class PauseScreen {
 	private static ImageIcon pauseImage;
 	static JLabel pauseScreen = new JLabel("", JLabel.CENTER);
-	//static PauseScreen p = new PauseScreen();
 	
 	public static void drawPauseScreen() {
-		//p.createImageIcon("resources/5.png", "");
 		pauseScreen.setText("PAUSE");
 	}
 

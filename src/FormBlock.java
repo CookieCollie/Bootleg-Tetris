@@ -10,7 +10,9 @@ public class FormBlock {
 	private Image BlockImg;
 	private int XShift=0, x, y;
 	private long CurrentTime, PassedTime;
-	private int Speed, SpeedBoost, CurrentSpeed;
+	private static int Speed;
+	private int SpeedBoost;
+	private static int CurrentSpeed;
 	private int color;
 
 	private static int scoreFB;
@@ -32,7 +34,7 @@ public class FormBlock {
 
 		CurrentTime = 0;
 		PassedTime = System.currentTimeMillis();
-		Speed = 600; // Implement speed/difficulty change in future
+		Speed = Difficulty.changeDifficulty(); // Implement speed/difficulty change in future
 					 // The smaller the number, the faster the blocks move
 		SpeedBoost = 0;
 		CurrentSpeed = Speed;
@@ -104,7 +106,7 @@ public class FormBlock {
 				 GridBoard.getGrid()[height][j] = GridBoard.getGrid()[i][j];
 				 //System.out.print(GridBoard.getGrid()[height][j]);
 			 }
-			 if (count==10) scoreFB += 1;
+			 if (count==GridBoard.COLUMNS) scoreFB += 10;
 			 if (count<GridBoard.getGrid()[0].length) {
 				 height--;
 			 }
@@ -192,5 +194,13 @@ public class FormBlock {
 
 	public static int getScoreFB() {
 		return scoreFB;
+	}
+	
+	public static void setSpeed(int speed) {
+		Speed = speed;
+	}
+	
+	public static void setCurrentSpeed(int currentSpeed) {
+		CurrentSpeed = currentSpeed;
 	}
 }
