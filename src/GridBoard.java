@@ -31,7 +31,7 @@ public class GridBoard extends JPanel implements KeyListener {
 	private int delay = 1000 / FPS;
 	private Timer GameLoop;
 	
-	private boolean gameOver = false, pause = false;
+	private boolean gameOver = false, pause = false, gridOn = false;
 	
 	private static GridBoard boardSingle = null;
 
@@ -54,7 +54,7 @@ public class GridBoard extends JPanel implements KeyListener {
 			Block6 = ImageIO.read(GridBoard.class.getResourceAsStream("/6.png"));*/
 
 			// Test
-			blocks = ImageIO.read(GridBoard.class.getResourceAsStream("/testColor.png"));
+			blocks = ImageIO.read(new File("resources/testColor.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -126,7 +126,7 @@ public class GridBoard extends JPanel implements KeyListener {
 		BufferedImage[] Blocks = {Block0, Block1, Block2, Block3, Block4, Block5, Block6};
 		super.paintComponent(Draw);
 		
-		//Draw.drawImage(Block1, 0, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS, 0, 0, 100, 100, null);
+		//Draw.drawImage(blocks, 0, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS, 0, 0, 100, 100, null); //Draw background
 		
 		CurrentShape.BlockRender(Draw);
 
@@ -138,36 +138,23 @@ public class GridBoard extends JPanel implements KeyListener {
 					//Test
 					Draw.drawImage(blocks.getSubimage((GRID[x][y] - 1)*BLOCKSIZE, 0, BLOCKSIZE, BLOCKSIZE), y*BLOCKSIZE, BLOCKSIZE*x, null);
 				}
-//				else if (GRID[x][y] == 2) {
-//					Draw.drawImage(Block1.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-//				}
-//				else if (GRID[x][y] == 3) {
-//					Draw.drawImage(Block2.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-//				}
-//				else if (GRID[x][y] == 4) {
-//					Draw.drawImage(Block3.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-//				}
-//				else if (GRID[x][y] == 5) {
-//					Draw.drawImage(Block4.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-//				}
-//				else if (GRID[x][y] == 6) {
-//					Draw.drawImage(Block5.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-//				}
-//				else if (GRID[x][y] == 7) {
-//					Draw.drawImage(Block6.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), y*BLOCKSIZE, x*BLOCKSIZE, null);
-//				}
 			}
 		}
-		for (int i = 0; i < ROWS; i++) {
-			Draw.drawLine(0, i * BLOCKSIZE, COLUMNS * BLOCKSIZE, i * BLOCKSIZE);
-		}
+		
+		//Toggle grid on/off
+		if (gridOn) {
+			for (int i = 0; i < ROWS; i++) {
+				Draw.drawLine(0, i * BLOCKSIZE, COLUMNS * BLOCKSIZE, i * BLOCKSIZE);
+			}
 
-		for (int i = 0; i < COLUMNS; i++) {
-			Draw.drawLine(i * BLOCKSIZE, 0, i * BLOCKSIZE, ROWS * BLOCKSIZE);
+			for (int i = 0; i < COLUMNS; i++) {
+				Draw.drawLine(i * BLOCKSIZE, 0, i * BLOCKSIZE, ROWS * BLOCKSIZE);
+			}
 		}
 		
+		//Draw pause menu background
 		if (pause) {
-			Draw.drawImage(Block5, 0, 0, 100, 100, 0, 0, 100, 100, null);
+			Draw.drawImage(blocks, 0, 0, 100, 100, 0, 0, 100, 100, null);
 		}
 		
 		Draw.drawLine(BLOCKSIZE*COLUMNS, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS);
@@ -241,6 +228,9 @@ public class GridBoard extends JPanel implements KeyListener {
 				PauseScreen.removePauseScreen();
 				GameLoop.start();
 			}
+		}
+		if (e.getKeyCode() == KeyEvent.VK_E) {
+			gridOn = !gridOn;
 		}
 	}
 
