@@ -34,16 +34,19 @@ public class GridBoard extends JPanel implements KeyListener {
 	private static boolean gameOver = false, pause = false, gridOn = true;
 	
 	private static GridBoard boardSingle = null;
+	
+	private int currBlock = rand.nextInt(7);
+	private int nextBlock = rand.nextInt(7);
 
 	private GridBoard() {
 		try {
-//			Block0 = ImageIO.read(new File("resources/0.png"));
-//			Block1 = ImageIO.read(new File("resources/1.png"));
-//			Block2 = ImageIO.read(new File("resources/2.png"));
-//			Block3 = ImageIO.read(new File("resources/3.png"));
-//			Block4 = ImageIO.read(new File("resources/4.png"));
-//			Block5 = ImageIO.read(new File("resources/5.png"));
-//			Block6 = ImageIO.read(new File("resources/6.png"));
+			Block0 = ImageIO.read(new File("resources/I.png"));
+			Block1 = ImageIO.read(new File("resources/Z.png"));
+			Block2 = ImageIO.read(new File("resources/S.png"));
+			Block3 = ImageIO.read(new File("resources/J.png"));
+			Block4 = ImageIO.read(new File("resources/L.png"));
+			Block5 = ImageIO.read(new File("resources/T.png"));
+			Block6 = ImageIO.read(new File("resources/O.png"));
 			
 			/*Block0 = ImageIO.read(GridBoard.class.getResourceAsStream("/0.png"));
 			Block1 = ImageIO.read(GridBoard.class.getResourceAsStream("/1.png"));
@@ -163,10 +166,18 @@ public class GridBoard extends JPanel implements KeyListener {
 
 		Draw.drawString("Difficulty: " + Difficulty.getPrintDiff(), BLOCKSIZE*COLUMNS+10, 40);
 		
-		Draw.drawRect(BLOCKSIZE*COLUMNS, 0, 120, BLOCKSIZE*ROWS/2);
+		Draw.drawLine(BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS/2, 2000, BLOCKSIZE*ROWS/2);
 		Draw.drawString("Highest scores: ", BLOCKSIZE*COLUMNS+10, BLOCKSIZE*ROWS/2+20);
 		
-		
+		if (currBlock != 0 && currBlock != 6) {
+			Draw.drawImage(Blocks[currBlock], BLOCKSIZE*COLUMNS+30, 150, BLOCKSIZE*COLUMNS+30+90, 210, 0, 0, 90, 60, null);
+		}
+		else
+			if (currBlock == 0)
+				Draw.drawImage(Block0, BLOCKSIZE*COLUMNS+10, 150, BLOCKSIZE*COLUMNS+10+120, 180, 0, 0, 120, 30, null);
+			else
+				Draw.drawImage(Block6, BLOCKSIZE*COLUMNS+30, 150, BLOCKSIZE*COLUMNS+30+60, 210, 0, 0, 60, 60, null);
+	
 		//PauseScreen.drawPauseScreen();
 		
 			
@@ -182,9 +193,9 @@ public class GridBoard extends JPanel implements KeyListener {
 	}
 	
 	public void SpawnNextBlock() {
-		RandomNum = rand.nextInt(7);
-		FormBlock NextShape = new FormBlock(Shape[RandomNum].getBlockImg(), Shape[RandomNum].getBlockCoordinates(), this, 
-											Shape[RandomNum].getColor());
+		//RandomNum = rand.nextInt(7);
+		FormBlock NextShape = new FormBlock(Shape[currBlock].getBlockImg(), Shape[currBlock].getBlockCoordinates(), this, 
+											Shape[currBlock].getColor());
 		CurrentShape = NextShape;
 		
 		for (int row=0; row<CurrentShape.getBlockCoordinates().length; row++) {
@@ -196,6 +207,8 @@ public class GridBoard extends JPanel implements KeyListener {
 				}
 			}
 		}
+		currBlock = rand.nextInt(7);
+		System.out.println(currBlock);
 	}
 
 
