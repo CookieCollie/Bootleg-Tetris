@@ -174,10 +174,11 @@ public class GridBoard extends JPanel implements KeyListener {
 	}
 
 	public void blockUpdate() {
-		CurrentShape.BlockUpdate();
 		if (gameOver) {
 			GameLoop.stop();
 		}
+		else
+			CurrentShape.BlockUpdate();
 	}
 	
 	public void SpawnNextBlock() {
@@ -189,7 +190,7 @@ public class GridBoard extends JPanel implements KeyListener {
 		for (int row=0; row<CurrentShape.getBlockCoordinates().length; row++) {
 			for (int col=0; col<CurrentShape.getBlockCoordinates()[row].length; col++) {
 				if (CurrentShape.getBlockCoordinates()[row][col] != 0) {
-					if (GRID[row][col+3]!=0) {
+					if (GRID[row][col+5]!=0) {
 						gameOver = true;
 					}
 				}
