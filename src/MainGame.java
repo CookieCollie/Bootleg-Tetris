@@ -9,7 +9,7 @@ public class MainGame {
 	public static boolean newGame = false;
 //	public static final int WIDTH = GridBoard.getCOLUMNS() * GridBoard.getBLOCKSIZE(),
 //			HEIGHT = GridBoard.getROWS() * GridBoard.getBLOCKSIZE() + (GridBoard.getROWS()+10) * 2;
-	public static final int WIDTH = 336, HEIGHT = 639;
+	public static final int WIDTH = 336, HEIGHT = 660;
 	
 	private static JMenuBar menuBar = new JMenuBar();;
 	private JMenu game = new JMenu("Game");

@@ -57,7 +57,7 @@ public class GridBoard extends JPanel implements KeyListener {
 			Block6 = ImageIO.read(GridBoard.class.getResourceAsStream("/6.png"));*/
 
 			// Test
-			blocks = ImageIO.read(new File("resources/testColor.png"));
+			blocks = ImageIO.read(new File("resources/Block.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
