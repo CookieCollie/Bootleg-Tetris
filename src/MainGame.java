@@ -48,7 +48,7 @@ public class MainGame {
 				menuBar.revalidate();
 				
 				try {
-					BGM = new Audio("NyanCatOriginal-DangCapNhat_4237d_hq.wav");
+					BGM = new Audio("audio/NyanCatOriginal-DangCapNhat_4237d_hq.wav");
 					BGM.playBGM();
 				} catch (UnsupportedAudioFileException e1) {
 					// TODO Auto-generated catch block

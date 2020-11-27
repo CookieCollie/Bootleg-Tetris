@@ -79,8 +79,6 @@ public class GridBoard extends JPanel implements KeyListener {
 		});
 
 		GameLoop.start();
-		audioPlayer = new AudioPlayer("audio/Phạm-Nguyên-Ngọc_-Vanh_-B.-Sao-Em-Lại-Tắt-Máy-.wav");
-		audioPlayer.play();
 
 		// Shapes
 //		Shape[0] = new FormBlock(Block0.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), new int[][] { { 1, 1, 1, 1 } },

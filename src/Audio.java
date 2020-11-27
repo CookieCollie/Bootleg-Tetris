@@ -9,11 +9,12 @@ public class Audio {
 	String status;
 	
 	AudioInputStream musicInput;
-	static String filePath;
+	private String filePath;
 	
 	public Audio(String filePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException{
-		// TODO Auto-generated constructor stub 
-		musicInput = AudioSystem.getAudioInputStream(new File("audio/"+filePath).getAbsoluteFile());
+		// TODO Auto-generated constructor stub
+		this.filePath = filePath;
+		musicInput = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
 		
 		music = AudioSystem.getClip();
 		music.open(musicInput);
@@ -43,7 +44,7 @@ public class Audio {
 	}
 	
 	public void resetAudioStream(String filePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-		musicInput = AudioSystem.getAudioInputStream(new File("audio/"+filePath).getAbsoluteFile());
+		musicInput = AudioSystem.getAudioInputStream(new File(filePath).getAbsoluteFile());
 		music.open(musicInput);
 		music.loop(Clip.LOOP_CONTINUOUSLY);
 	}
