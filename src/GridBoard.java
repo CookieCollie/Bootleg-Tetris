@@ -16,9 +16,11 @@ import javax.swing.*;
 
 public class GridBoard extends JPanel implements KeyListener {
 
+	String PicBGPath = "resources/BGPicture.png";
+
 	AudioPlayer audioPlayer;
 
-	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6, blocks;
+	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6, blocks, BGPg;
 
 	public final static int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 30;
 	public int[][] GRID = new int[ROWS][COLUMNS];
@@ -61,6 +63,7 @@ public class GridBoard extends JPanel implements KeyListener {
 
 			// Test
 			blocks = ImageIO.read(new File("resources/Block.png"));
+			BGPg = ImageIO.read(new File("resources/BGPicture.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -133,8 +136,8 @@ public class GridBoard extends JPanel implements KeyListener {
 		Draw = g;
 		BufferedImage[] Blocks = {Block0, Block1, Block2, Block3, Block4, Block5, Block6};
 		super.paintComponent(Draw);
-		
-		//Draw.drawImage(blocks, 0, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS, 0, 0, 100, 100, null); //Draw background
+
+		Draw.drawImage(BGPg, 0, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS, 0, 0, 100, 100, null); //Draw background
 		
 		CurrentShape.BlockRender(Draw);
 
