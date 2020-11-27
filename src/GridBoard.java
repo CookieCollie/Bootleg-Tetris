@@ -194,6 +194,7 @@ public class GridBoard extends JPanel implements KeyListener {
 
 	public void blockUpdate() {
 		if (gameOver) {
+			MainGame.getBGM().stopBGM();
 			GameLoop.stop();
 		}
 		else
@@ -243,10 +244,23 @@ public class GridBoard extends JPanel implements KeyListener {
 			pause = !pause;
 			if (pause) {
 				PauseScreen.drawPauseScreen();
+				MainGame.getBGM().pauseBGM();
 				GameLoop.stop();
 			}
 			else {
 				PauseScreen.removePauseScreen();
+				try {
+					MainGame.getBGM().resumeBGM();
+				} catch (UnsupportedAudioFileException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				GameLoop.start();
 			}
 		}

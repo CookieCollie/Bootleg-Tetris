@@ -18,9 +18,9 @@ public class MainGame {
 	private JMenu game = new JMenu("Game");
 	private JMenuItem gameItem = new JMenuItem("New game");
 	private static JFrame GameWindow = new JFrame("Bootleg Tetris");
+	private static Audio BGM;
 
 	public MainGame() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-
 		GameWindow.setSize(WIDTH + 120, HEIGHT);
 		GameWindow.setResizable(false);
 		GameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -46,6 +46,20 @@ public class MainGame {
 				GameWindow.addKeyListener(Board);
 				//menuBar.remove(0);
 				menuBar.revalidate();
+				
+				try {
+					BGM = new Audio("NyanCatOriginal-DangCapNhat_4237d_hq.wav");
+					BGM.playBGM();
+				} catch (UnsupportedAudioFileException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (LineUnavailableException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		game.add(gameItem);
@@ -63,10 +77,23 @@ public class MainGame {
 				
 				if (pause) {
 					PauseScreen.drawPauseScreen();
+					BGM.pauseBGM();
 					GridBoard.getGameLoop().stop();
 				}
 				else {
 					PauseScreen.removePauseScreen();
+					try {
+						BGM.resumeBGM();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					GridBoard.getGameLoop().start();
 				}
 			}
@@ -124,6 +151,10 @@ public class MainGame {
 		GameWindow.add(PauseScreen.pauseScreen);
 		
 		GameWindow.setVisible(true);
+	}
+	
+	public static Audio getBGM() {
+		return BGM;
 	}
 
 	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
