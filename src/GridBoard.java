@@ -10,9 +10,13 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 public class GridBoard extends JPanel implements KeyListener {
+
+	AudioPlayer audioPlayer;
 
 	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6, blocks;
 
@@ -37,7 +41,7 @@ public class GridBoard extends JPanel implements KeyListener {
 	private int currBlock = rand.nextInt(7);
 	private int nextBlock = rand.nextInt(7);
 
-	private GridBoard() {
+	private GridBoard() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		try {
 			Block0 = ImageIO.read(new File("resources/I.png"));
 			Block1 = ImageIO.read(new File("resources/Z.png"));
@@ -72,6 +76,8 @@ public class GridBoard extends JPanel implements KeyListener {
 		});
 
 		GameLoop.start();
+		audioPlayer = new AudioPlayer("audio/Phạm-Nguyên-Ngọc_-Vanh_-B.-Sao-Em-Lại-Tắt-Máy-.wav");
+		audioPlayer.play();
 
 		// Shapes
 //		Shape[0] = new FormBlock(Block0.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), new int[][] { { 1, 1, 1, 1 } },
@@ -114,7 +120,7 @@ public class GridBoard extends JPanel implements KeyListener {
 		SpawnNextBlock();
 	}
 	
-	public static GridBoard getInstance() {
+	public static GridBoard getInstance() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		if (boardSingle == null) {
 			boardSingle = new GridBoard();
 		}

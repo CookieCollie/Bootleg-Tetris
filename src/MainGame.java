@@ -2,7 +2,10 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 public class MainGame {
@@ -16,7 +19,8 @@ public class MainGame {
 	private JMenuItem gameItem = new JMenuItem("New game");
 	private static JFrame GameWindow = new JFrame("Bootleg Tetris");
 
-	public MainGame() {
+	public MainGame() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+
 		GameWindow.setSize(WIDTH + 120, HEIGHT);
 		GameWindow.setResizable(false);
 		GameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +32,16 @@ public class MainGame {
 		// JgameItems show the menu items
 		gameItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GridBoard Board = GridBoard.getInstance();
+				GridBoard Board = null;
+				try {
+					Board = GridBoard.getInstance();
+				} catch (UnsupportedAudioFileException unsupportedAudioFileException) {
+					unsupportedAudioFileException.printStackTrace();
+				} catch (IOException ioException) {
+					ioException.printStackTrace();
+				} catch (LineUnavailableException lineUnavailableException) {
+					lineUnavailableException.printStackTrace();
+				}
 				GameWindow.add(Board);
 				GameWindow.addKeyListener(Board);
 				//menuBar.remove(0);
@@ -113,7 +126,7 @@ public class MainGame {
 		GameWindow.setVisible(true);
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		new MainGame();
 	}
 }
