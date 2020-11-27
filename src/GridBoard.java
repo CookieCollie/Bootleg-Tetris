@@ -10,11 +10,17 @@ import java.io.IOException;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 public class GridBoard extends JPanel implements KeyListener {
 
-	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6, blocks;
+	String PicBGPath = "resources/BGPicture.png";
+
+	AudioPlayer audioPlayer;
+
+	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6, blocks, BGPg;
 
 	public final static int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 30;
 	public int[][] GRID = new int[ROWS][COLUMNS];
@@ -37,7 +43,7 @@ public class GridBoard extends JPanel implements KeyListener {
 	private int currBlock = rand.nextInt(7);
 	private int nextBlock = rand.nextInt(7);
 
-	private GridBoard() {
+	private GridBoard() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		try {
 			Block0 = ImageIO.read(new File("resources/I.png"));
 			Block1 = ImageIO.read(new File("resources/Z.png"));
@@ -57,6 +63,7 @@ public class GridBoard extends JPanel implements KeyListener {
 
 			// Test
 			blocks = ImageIO.read(new File("resources/Block.png"));
+			BGPg = ImageIO.read(new File("resources/BGPicture.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -72,6 +79,8 @@ public class GridBoard extends JPanel implements KeyListener {
 		});
 
 		GameLoop.start();
+		audioPlayer = new AudioPlayer("audio/Phạm-Nguyên-Ngọc_-Vanh_-B.-Sao-Em-Lại-Tắt-Máy-.wav");
+		audioPlayer.play();
 
 		// Shapes
 //		Shape[0] = new FormBlock(Block0.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), new int[][] { { 1, 1, 1, 1 } },
@@ -114,7 +123,7 @@ public class GridBoard extends JPanel implements KeyListener {
 		SpawnNextBlock();
 	}
 	
-	public static GridBoard getInstance() {
+	public static GridBoard getInstance() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		if (boardSingle == null) {
 			boardSingle = new GridBoard();
 		}
@@ -127,8 +136,8 @@ public class GridBoard extends JPanel implements KeyListener {
 		Draw = g;
 		BufferedImage[] Blocks = {Block0, Block1, Block2, Block3, Block4, Block5, Block6};
 		super.paintComponent(Draw);
-		
-		//Draw.drawImage(blocks, 0, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS, 0, 0, 100, 100, null); //Draw background
+
+		Draw.drawImage(BGPg, 0, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS, 0, 0, 100, 100, null); //Draw background
 		
 		CurrentShape.BlockRender(Draw);
 
