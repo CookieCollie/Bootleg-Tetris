@@ -18,7 +18,7 @@ public class GridBoard extends JPanel implements KeyListener {
 
 	String PicBGPath = "resources/BGPicture.png";
 
-	AudioPlayer audioPlayer;
+	Audio audio;
 
 	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6, blocks, BGPg;
 
@@ -201,6 +201,8 @@ public class GridBoard extends JPanel implements KeyListener {
 	public void blockUpdate() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		if (gameOver) {
 			MainGame.getBGM().stopBGM();
+			audio = new Audio("audio/FAILURE NOTIFICATION.wav");
+			audio.playBGMDelay();
 			GameLoop.stop();
 		}
 		else
