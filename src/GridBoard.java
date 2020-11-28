@@ -73,7 +73,15 @@ public class GridBoard extends JPanel implements KeyListener {
 		GameLoop = new Timer(delay, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				blockUpdate();
+				try {
+					blockUpdate();
+				} catch (UnsupportedAudioFileException unsupportedAudioFileException) {
+					unsupportedAudioFileException.printStackTrace();
+				} catch (IOException ioException) {
+					ioException.printStackTrace();
+				} catch (LineUnavailableException lineUnavailableException) {
+					lineUnavailableException.printStackTrace();
+				}
 				repaint();
 			}
 		});
@@ -190,7 +198,7 @@ public class GridBoard extends JPanel implements KeyListener {
 		
 	}
 
-	public void blockUpdate() {
+	public void blockUpdate() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		if (gameOver) {
 			MainGame.getBGM().stopBGM();
 			GameLoop.stop();

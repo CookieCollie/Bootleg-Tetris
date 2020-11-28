@@ -1,9 +1,14 @@
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 public class FormBlock {
+
+	private Audio audio;
 
 	private int[][] BlockCoordinates;
 	private GridBoard GridBoard;
@@ -40,7 +45,7 @@ public class FormBlock {
 		CurrentSpeed = Speed;
 	}
 
-	public void BlockUpdate() {
+	public void BlockUpdate() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		CurrentTime += System.currentTimeMillis() - PassedTime;
 		PassedTime = System.currentTimeMillis();
 		
@@ -95,7 +100,7 @@ public class FormBlock {
 		moveX = true;
 	}
 	
-	private void CheckLine() {
+	private void CheckLine() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		int height = GridBoard.getGrid().length - 1;
 		 for (int i=height; i>0; i--) {
 			 int count=0;
@@ -106,7 +111,11 @@ public class FormBlock {
 				 GridBoard.getGrid()[height][j] = GridBoard.getGrid()[i][j];
 				 //System.out.print(GridBoard.getGrid()[height][j]);
 			 }
-			 if (count==GridBoard.COLUMNS) scoreFB += 10;
+			 if (count==GridBoard.COLUMNS) {
+			 	scoreFB += 10;
+			 	audio = new Audio("audio/OPEN GAME.wav");
+			 	audio.playBGMDelay();
+			 }
 			 if (count<GridBoard.getGrid()[0].length) {
 				 height--;
 			 }

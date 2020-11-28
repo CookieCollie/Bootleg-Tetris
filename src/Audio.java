@@ -24,6 +24,16 @@ public class Audio {
 	public void playBGM() {
 		music.start();
 	}
+
+	public void playBGMDelay() {
+		music.start();
+		try {
+			Thread.sleep(200);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		music.stop();
+	}
 	
 	public void pauseBGM() {
 		this.currFrame = this.music.getMicrosecondPosition();
