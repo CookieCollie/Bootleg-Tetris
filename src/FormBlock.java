@@ -206,6 +206,10 @@ public class FormBlock {
 		return scoreFB;
 	}
 	
+	public static void setScoreFB(int scoreFB) {
+		FormBlock.scoreFB = scoreFB;
+	}
+	
 	public static void setSpeed(int speed) {
 		Speed = speed;
 	}

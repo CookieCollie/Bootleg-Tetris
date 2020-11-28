@@ -17,6 +17,10 @@ public class Difficulty {
 			printDiff = "Hard";
 			return 200;
 		}
+		case 3: {
+			printDiff = "Impossible";
+			return 50;
+		}
 		default:
 			throw new IllegalArgumentException("Unexpected value: " + difficulty);
 		}

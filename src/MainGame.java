@@ -145,6 +145,17 @@ public class MainGame {
 			}
 		});
 		game.add(gameItem);
+		
+		gameItem = new JMenuItem("Impossible");
+		gameItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Difficulty.setDifficulty(3);
+				//FormBlock.setSpeed(Difficulty.changeDifficulty());
+				FormBlock.setCurrentSpeed(Difficulty.changeDifficulty());
+			}
+		});
+		game.add(gameItem);
 
 		// add menu bar to frame
 		GameWindow.setJMenuBar(menuBar);

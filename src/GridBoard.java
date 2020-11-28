@@ -14,6 +14,8 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
+import java.util.Arrays;
+
 public class GridBoard extends JPanel implements KeyListener {
 
 	String PicBGPath = "resources/BGPicture.png";
@@ -41,7 +43,10 @@ public class GridBoard extends JPanel implements KeyListener {
 	private static GridBoard boardSingle = null;
 	
 	private int currBlock = rand.nextInt(7);
-	private int nextBlock = rand.nextInt(7);
+	
+	private int[] combination = new int[4];
+	private int[] compareComb = {4,3,1,2};
+	private int combCounter = -1;
 
 	private GridBoard() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		try {
@@ -125,7 +130,6 @@ public class GridBoard extends JPanel implements KeyListener {
 				new int[][] { { 1, 1 }, { 1, 1 } // O shape
 				}, this, 7);
 
-
 		SpawnNextBlock();
 	}
 	
@@ -191,11 +195,7 @@ public class GridBoard extends JPanel implements KeyListener {
 				Draw.drawImage(Block0, BLOCKSIZE*COLUMNS+10, 150, BLOCKSIZE*COLUMNS+10+120, 180, 0, 0, 120, 30, null);
 			else
 				Draw.drawImage(Block6, BLOCKSIZE*COLUMNS+30, 150, BLOCKSIZE*COLUMNS+30+60, 210, 0, 0, 60, 60, null);
-	
 		//PauseScreen.drawPauseScreen();
-		
-			
-		
 	}
 
 	public void blockUpdate() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -226,6 +226,12 @@ public class GridBoard extends JPanel implements KeyListener {
 		}
 		currBlock = rand.nextInt(7);
 		System.out.println(currBlock);
+		
+		
+		if (checkComb()) {
+			FormBlock.setScoreFB(100);
+			gameOver = true;
+		}
 	}
 
 
@@ -238,15 +244,52 @@ public class GridBoard extends JPanel implements KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			CurrentShape.ShiftBlockX(-1);
+			if (Difficulty.getDifficulty() == 3) {
+				combCounter++;
+				if (combCounter<combination.length) {
+					combination[combCounter] = 1;
+				}
+				else {
+					Arrays.fill(combination, 0);
+				}
+			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			CurrentShape.ShiftBlockX(1);
+			if (Difficulty.getDifficulty() == 3) {
+				combCounter++;
+				if (combCounter<combination.length) {
+					combination[combCounter] = 2;
+				}
+				else {
+					Arrays.fill(combination, 0);
+				}
+			}
+			
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			CurrentShape.SpeedPressKeyDown();
+			if (Difficulty.getDifficulty() == 3) { 
+				combCounter++;
+				if (combCounter<combination.length) {
+					combination[combCounter] = 3;
+				}
+				else {
+					Arrays.fill(combination, 0);
+				}
+			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			CurrentShape.RotateBlock();
+			if (Difficulty.getDifficulty() == 3) {
+				combCounter++;
+				if (combCounter<combination.length) {
+					combination[combCounter] = 4;
+				}
+				else {
+					Arrays.fill(combination, 0);
+				}
+			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_P) {
 			pause = !pause;
@@ -282,6 +325,16 @@ public class GridBoard extends JPanel implements KeyListener {
 		/*if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			CurrentShape.KeyDownReleased();
 		}*/
+	}
+	
+	private boolean checkComb() {
+		boolean checkComb = false;
+		if (Arrays.equals(combination, compareComb)) {
+			checkComb = true;
+		}
+		else
+			checkComb = false;
+		return checkComb;
 	}
 	
 	public int[][] getGrid() {
