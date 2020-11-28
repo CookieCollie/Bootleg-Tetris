@@ -85,6 +85,7 @@ public class FormBlock {
 						if (GridBoard.getGrid()[y + i + 1][j + x] != 0) {
 							HitGround = true;
 							CurrentSpeed = 700;
+							CurrentSpeed = Speed;
 						}
 					}
 				}
