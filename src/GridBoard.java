@@ -1,12 +1,11 @@
 import java.awt.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.ImageObserver;
 import java.io.File;
 import java.io.IOException;
+import java.text.AttributedCharacterIterator;
 import java.util.Random;
 
 import javax.imageio.ImageIO;
@@ -16,9 +15,11 @@ import javax.swing.*;
 
 import java.util.Arrays;
 
-public class GridBoard extends JPanel implements KeyListener {
+public class GridBoard extends JPanel implements KeyListener, MouseMotionListener, MouseListener {
 
 	String PicBGPath = "resources/BGPicture.png";
+
+	private boolean leftClick = false;
 
 	Audio audio;
 
@@ -48,7 +49,7 @@ public class GridBoard extends JPanel implements KeyListener {
 	private int[] compareComb = {4,3,1,2};
 	private int combCounter = -1;
 
-	private GridBoard() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public GridBoard() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		try {
 			Block0 = ImageIO.read(new File("resources/I.png"));
 			Block1 = ImageIO.read(new File("resources/Z.png"));
@@ -57,7 +58,7 @@ public class GridBoard extends JPanel implements KeyListener {
 			Block4 = ImageIO.read(new File("resources/L.png"));
 			Block5 = ImageIO.read(new File("resources/T.png"));
 			Block6 = ImageIO.read(new File("resources/O.png"));
-			
+
 			/*Block0 = ImageIO.read(GridBoard.class.getResourceAsStream("/0.png"));
 			Block1 = ImageIO.read(GridBoard.class.getResourceAsStream("/1.png"));
 			Block2 = ImageIO.read(GridBoard.class.getResourceAsStream("/2.png"));
@@ -132,14 +133,14 @@ public class GridBoard extends JPanel implements KeyListener {
 
 		SpawnNextBlock();
 	}
-	
-	public static GridBoard getInstance() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-		if (boardSingle == null) {
-			boardSingle = new GridBoard();
-		}
-		
-		return boardSingle;
-	}
+
+//	public static GridBoard getInstance() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+//		if (boardSingle == null) {
+//			boardSingle = new GridBoard();
+//		}
+//
+//		return boardSingle;
+//	}
 
 
 	public void paintComponent(Graphics g) {
@@ -174,9 +175,12 @@ public class GridBoard extends JPanel implements KeyListener {
 		}
 		
 		//Draw pause menu background
-		if (pause) {
-			Draw.drawImage(blocks, 0, 0, 100, 100, 0, 0, 100, 100, null);
-		}
+//		if (pause) {
+//			Draw.drawImage(blocks, 0, 0, 100, 100, 0, 0, 100, 100, null);
+//			Draw.setColor(Color.WHITE);
+//			Draw.setFont(new Font("Georgia", Font.BOLD, 50));
+//			Draw.drawString("GAME PAUSE", (MainGame.WIDTH)/2, MainGame.HEIGHT/2);
+//		}
 		
 		Draw.drawLine(BLOCKSIZE*COLUMNS, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS);
 
@@ -232,6 +236,24 @@ public class GridBoard extends JPanel implements KeyListener {
 			FormBlock.setScoreFB(100);
 			gameOver = true;
 		}
+	}
+
+	public void startGame(){
+		stopGame();
+		SpawnNextBlock();
+		gameOver = false;
+		GameLoop.start();
+	}
+
+	public void stopGame(){
+		FormBlock.setScoreFB(0);
+
+		for(int row = 0; row < (GRID.length); row++) {
+			for(int col = 0; col < (GRID[row].length); col ++) {
+				GRID[row][col] = 0;
+			}
+		}
+		GameLoop.stop();
 	}
 
 
@@ -294,12 +316,12 @@ public class GridBoard extends JPanel implements KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_P) {
 			pause = !pause;
 			if (pause) {
-				PauseScreen.drawPauseScreen();
+				//PauseScreen.drawPauseScreen();
 				MainGame.getBGM().pauseBGM();
 				GameLoop.stop();
 			}
 			else {
-				PauseScreen.removePauseScreen();
+				//PauseScreen.removePauseScreen();
 				try {
 					MainGame.getBGM().resumeBGM();
 				} catch (UnsupportedAudioFileException e1) {
@@ -322,9 +344,8 @@ public class GridBoard extends JPanel implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		/*if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+		if (e.getKeyCode() == KeyEvent.VK_DOWN)
 			CurrentShape.KeyDownReleased();
-		}*/
 	}
 	
 	private boolean checkComb() {
@@ -363,6 +384,45 @@ public class GridBoard extends JPanel implements KeyListener {
 	
 	public static Timer getGameLoop() {
 		return GameLoop;
+	}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		int mouseX = e.getX();
+		int mouseY = e.getY();
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		int mouseX = e.getX();
+		int mouseY = e.getY();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		if(e.getButton() == MouseEvent.BUTTON1)
+			leftClick = true;
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		if(e.getButton() == MouseEvent.BUTTON1)
+			leftClick = false;
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+
 	}
 }
 
