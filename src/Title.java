@@ -7,6 +7,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -32,9 +33,9 @@ public class Title extends JPanel implements MouseListener, MouseMotionListener{
 
     public Title(MainGame mainGame){
         try {
-            title = ImageIO.read(GridBoard.class.getResource("/Title.png"));
-            instructions = ImageIO.read(GridBoard.class.getResource("/arrow.png"));
-            play = ImageIO.read(GridBoard.class.getResource("/play.png"));
+            title = ImageIO.read(new File("resources/Title.png"));
+            instructions = ImageIO.read(new File("resources/arrow.png"));
+            play = ImageIO.read(new File("resources/play.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

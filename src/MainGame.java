@@ -5,9 +5,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.*;
-
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
@@ -28,7 +25,7 @@ public class MainGame {
 	private GridBoard Board = new GridBoard();
 
 	public MainGame() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-//		BGM = new Audio("audio/NyanCatOriginal-DangCapNhat_4237d_hq.wav");
+		BGM = new Audio("audio/bottle_pop_2-POP-CHANGE.wav");
 
 		GameWindow.setSize(WIDTH + 120, HEIGHT);
 		GameWindow.setResizable(false);
@@ -46,33 +43,27 @@ public class MainGame {
 		// JgameItems show the menu items
 		gameItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					Board.stopGame();
-					BGM.stopBGM();
-					Board = new GridBoard();
-				} catch (UnsupportedAudioFileException unsupportedAudioFileException) {
-					unsupportedAudioFileException.printStackTrace();
-				} catch (IOException ioException) {
-					ioException.printStackTrace();
-				} catch (LineUnavailableException lineUnavailableException) {
-					lineUnavailableException.printStackTrace();
-				}
-				GameWindow.add(Board);
-				GameWindow.addKeyListener(Board);
+				
+				Board.startGame();
+				//BGM.stopBGM();
+				BGM.playBGM();
+				
+//				GameWindow.add(Board);
+//				GameWindow.addKeyListener(Board);
 				//menuBar.remove(0);
 				menuBar.revalidate();
 
-					BGM.playBGM();
-				try {
-					BGM = new Audio("audio/NyanCatOriginal-DangCapNhat_4237d_hq.wav");
-				} catch (UnsupportedAudioFileException unsupportedAudioFileException) {
-					unsupportedAudioFileException.printStackTrace();
-				} catch (IOException ioException) {
-					ioException.printStackTrace();
-				} catch (LineUnavailableException lineUnavailableException) {
-					lineUnavailableException.printStackTrace();
-				}
-				Board.startGame();
+				//BGM.playBGM();
+//				try {
+//					BGM = new Audio("audio/bottle_pop_2-POP-CHANGE.wav");
+//				} catch (UnsupportedAudioFileException unsupportedAudioFileException) {
+//					unsupportedAudioFileException.printStackTrace();
+//				} catch (IOException ioException) {
+//					ioException.printStackTrace();
+//				} catch (LineUnavailableException lineUnavailableException) {
+//					lineUnavailableException.printStackTrace();
+//				}
+				//Board.startGame();
 			}
 		});
 		game.add(gameItem);
@@ -80,39 +71,43 @@ public class MainGame {
 		// add a separator
 		game.addSeparator();
 
-//		gameItem = new JMenuItem("Pause");
-//		gameItem.addActionListener(new ActionListener() {
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				boolean pause = Board.getPause();
-//				pause = !pause;
-//				Board.setPause(pause);
-//
-//				if (pause) {
-//					//PauseScreen.drawPauseScreen();
-//					BGM.pauseBGM();
-//					Board.getGameLoop().stop();
-//				}
-//				else {
-//					//PauseScreen.removePauseScreen();
-//					try {
-//						BGM.resumeBGM();
-//					} catch (UnsupportedAudioFileException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					} catch (IOException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					} catch (LineUnavailableException e1) {
-//						// TODO Auto-generated catch block
-//						e1.printStackTrace();
-//					}
-//					Board.getGameLoop().start();
-//				}
-//			}
-//		});
-//		game.add(gameItem);
+		
+		//Pause
+		gameItem = new JMenuItem("Pause");
+		gameItem.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				boolean pause = Board.getPause();
+				pause = !pause;
+				Board.setPause(pause);
 
+				if (pause) {
+					PauseScreen.drawPauseScreen();
+					BGM.pauseBGM();
+					Board.getGameLoop().stop();
+				}
+				else {
+					PauseScreen.removePauseScreen();
+					try {
+						BGM.resumeBGM();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					Board.getGameLoop().start();
+				}
+			}
+		});
+		game.add(gameItem);
+		
+		
+		//Exit
 		gameItem = new JMenuItem("Exit");
 		gameItem.addActionListener(new ActionListener() {
 			@Override
@@ -123,6 +118,7 @@ public class MainGame {
 		game.add(gameItem);
 		
 		
+		//Difficulty
 		game = new JMenu("Difficulty");
 		menuBar.add(game);
 		
@@ -183,8 +179,8 @@ public class MainGame {
 		GameWindow.addMouseListener(Board);
 		GameWindow.add(Board);
 		GameWindow.addKeyListener(Board);
-		BGM = new Audio("audio/NyanCatOriginal-DangCapNhat_4237d_hq.wav");
-		BGM.playBGM();
+		//BGM = new Audio("audio/NyanCatOriginal-DangCapNhat_4237d_hq.wav");
+		//BGM.playBGM();
 		GameWindow.setJMenuBar(menuBar);
 		//GameWindow.add(PauseScreen.pauseScreen);
 		Board.startGame();
@@ -195,7 +191,7 @@ public class MainGame {
 		return BGM;
 	}
 
-	public static void main(String[] args) throws SlickException, UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		new MainGame();
 	}
 }

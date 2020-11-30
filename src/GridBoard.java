@@ -175,12 +175,12 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		}
 		
 		//Draw pause menu background
-//		if (pause) {
-//			Draw.drawImage(blocks, 0, 0, 100, 100, 0, 0, 100, 100, null);
+		if (pause) {
+			Draw.drawImage(blocks, 0, 0, 100, 100, 0, 0, 100, 100, null);
 //			Draw.setColor(Color.WHITE);
 //			Draw.setFont(new Font("Georgia", Font.BOLD, 50));
 //			Draw.drawString("GAME PAUSE", (MainGame.WIDTH)/2, MainGame.HEIGHT/2);
-//		}
+		}
 		
 		Draw.drawLine(BLOCKSIZE*COLUMNS, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS);
 
@@ -242,6 +242,7 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		stopGame();
 		SpawnNextBlock();
 		gameOver = false;
+		
 		GameLoop.start();
 	}
 
@@ -253,6 +254,8 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 				GRID[row][col] = 0;
 			}
 		}
+		
+		pause = false;
 		GameLoop.stop();
 	}
 
@@ -316,12 +319,12 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		if (e.getKeyCode() == KeyEvent.VK_P) {
 			pause = !pause;
 			if (pause) {
-				//PauseScreen.drawPauseScreen();
+				PauseScreen.drawPauseScreen();
 				MainGame.getBGM().pauseBGM();
 				GameLoop.stop();
 			}
 			else {
-				//PauseScreen.removePauseScreen();
+				PauseScreen.removePauseScreen();
 				try {
 					MainGame.getBGM().resumeBGM();
 				} catch (UnsupportedAudioFileException e1) {
