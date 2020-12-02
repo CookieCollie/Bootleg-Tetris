@@ -110,13 +110,13 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		SpawnNextBlock();
 	}
 
-//	public static GridBoard getInstance() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-//		if (boardSingle == null) {
-//			boardSingle = new GridBoard();
-//		}
-//
-//		return boardSingle;
-//	}
+	public static GridBoard getInstance() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+		if (boardSingle == null) {
+			boardSingle = new GridBoard();
+		}
+
+		return boardSingle;
+	}
 
 
 	public void paintComponent(Graphics g) {
@@ -217,20 +217,25 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		stopGame();
 		SpawnNextBlock();
 		gameOver = false;
-		
+		Arrays.fill(combination, 0);
+		combCounter = -1;
 		GameLoop.start();
+		FormBlock.setScoreFB(0);
+		//Arrays.fill(GRID, 0);
+		pause = false;
+		
+		for (int i=0; i<GRID.length; i++) {
+			Arrays.fill(GRID[i], 0);
+		}
+		
+//		for(int row = 0; row < (GRID.length); row++) {
+//			for(int col = 0; col < (GRID[row].length); col ++) {
+//				GRID[row][col] = 0;
+//			}
+//		}
 	}
 
 	public void stopGame(){
-		FormBlock.setScoreFB(0);
-
-		for(int row = 0; row < (GRID.length); row++) {
-			for(int col = 0; col < (GRID[row].length); col ++) {
-				GRID[row][col] = 0;
-			}
-		}
-		
-		pause = false;
 		GameLoop.stop();
 	}
 

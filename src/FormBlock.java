@@ -170,7 +170,7 @@ public class FormBlock {
 		int[][] RotatedMatrix = null;
 		RotatedMatrix = TransposeMatrix(BlockCoordinates);
 		RotatedMatrix = ReverseMatrix(RotatedMatrix);
-		if (x+RotatedMatrix[0].length > 10 || y+RotatedMatrix.length > 20) { // 10 20 is gridboard's column and row
+		if (x+RotatedMatrix[0].length > GridBoard.COLUMNS || y+RotatedMatrix.length > GridBoard.ROWS) { // 10 20 is gridboard's column and row
 			return;
 		}
 		
