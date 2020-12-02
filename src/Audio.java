@@ -21,11 +21,11 @@ public class Audio {
 		music.loop(Clip.LOOP_CONTINUOUSLY);
 	}
 	
-	public void playBGM() {
+	public void playMusic() {
 		music.start();
 	}
 
-	public void playBGMDelay() {
+	public void playMusicDelay() {
 		music.start();
 		try {
 			Thread.sleep(200);
@@ -35,19 +35,19 @@ public class Audio {
 		music.stop();
 	}
 	
-	public void pauseBGM() {
+	public void pauseMusic() {
 		this.currFrame = this.music.getMicrosecondPosition();
 		music.stop();
 	}
 	
-	public void resumeBGM() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public void resumeMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		music.close();
 		resetAudioStream(filePath);
 		music.setMicrosecondPosition(currFrame);
-		this.playBGM();
+		this.playMusic();
 	}
 	
-	public void stopBGM() {
+	public void stopMusic() {
 		currFrame = 0L;
 		music.stop();
 		music.close();

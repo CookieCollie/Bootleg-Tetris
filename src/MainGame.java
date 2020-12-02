@@ -25,7 +25,7 @@ public class MainGame {
 	private GridBoard Board = new GridBoard();
 
 	public MainGame() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-		BGM = new Audio("audio/bottle_pop_2-POP-CHANGE.wav");
+		BGM = new Audio("audio/NyanCatOriginal-DangCapNhat_4237d_hq.wav");
 
 		GameWindow.setSize(WIDTH + 120, HEIGHT);
 		GameWindow.setResizable(false);
@@ -43,27 +43,9 @@ public class MainGame {
 		// JgameItems show the menu items
 		gameItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				Board.startGame();
-				//BGM.stopBGM();
-				BGM.playBGM();
-				
-//				GameWindow.add(Board);
-//				GameWindow.addKeyListener(Board);
-				//menuBar.remove(0);
+				BGM.playMusic();
 				menuBar.revalidate();
-
-				//BGM.playBGM();
-//				try {
-//					BGM = new Audio("audio/bottle_pop_2-POP-CHANGE.wav");
-//				} catch (UnsupportedAudioFileException unsupportedAudioFileException) {
-//					unsupportedAudioFileException.printStackTrace();
-//				} catch (IOException ioException) {
-//					ioException.printStackTrace();
-//				} catch (LineUnavailableException lineUnavailableException) {
-//					lineUnavailableException.printStackTrace();
-//				}
-				//Board.startGame();
 			}
 		});
 		game.add(gameItem);
@@ -73,7 +55,7 @@ public class MainGame {
 
 		
 		//Pause
-		gameItem = new JMenuItem("Pause");
+		gameItem = new JMenuItem("Pause/Unpause");
 		gameItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -83,13 +65,13 @@ public class MainGame {
 
 				if (pause) {
 					PauseScreen.drawPauseScreen();
-					BGM.pauseBGM();
+					BGM.pauseMusic();
 					Board.getGameLoop().stop();
 				}
 				else {
 					PauseScreen.removePauseScreen();
 					try {
-						BGM.resumeBGM();
+						BGM.resumeMusic();
 					} catch (UnsupportedAudioFileException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -122,6 +104,7 @@ public class MainGame {
 		game = new JMenu("Difficulty");
 		menuBar.add(game);
 		
+		/*Easy*/
 		gameItem = new JMenuItem("Easy");
 		gameItem.addActionListener(new ActionListener() {
 			@Override
@@ -133,6 +116,7 @@ public class MainGame {
 		});
 		game.add(gameItem);
 		
+		/*Medium*/
 		gameItem = new JMenuItem("Medium");
 		gameItem.addActionListener(new ActionListener() {
 			@Override
@@ -144,6 +128,7 @@ public class MainGame {
 		});
 		game.add(gameItem);
 		
+		/*Hard*/
 		gameItem = new JMenuItem("Hard");
 		gameItem.addActionListener(new ActionListener() {
 			@Override
@@ -155,20 +140,16 @@ public class MainGame {
 		});
 		game.add(gameItem);
 		
+		/*Impossible*/
 		gameItem = new JMenuItem("Impossible");
 		gameItem.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Difficulty.setDifficulty(3);
-				//FormBlock.setSpeed(Difficulty.changeDifficulty());
 				FormBlock.setCurrentSpeed(Difficulty.changeDifficulty());
 			}
 		});
 		game.add(gameItem);
-
-		// add menu bar to frame
-		//GameWindow.setJMenuBar(menuBar);
-		//GameWindow.add(PauseScreen.pauseScreen);
 		
 		GameWindow.setVisible(true);
 	}
@@ -179,8 +160,7 @@ public class MainGame {
 		GameWindow.addMouseListener(Board);
 		GameWindow.add(Board);
 		GameWindow.addKeyListener(Board);
-		//BGM = new Audio("audio/NyanCatOriginal-DangCapNhat_4237d_hq.wav");
-		//BGM.playBGM();
+		
 		GameWindow.setJMenuBar(menuBar);
 		//GameWindow.add(PauseScreen.pauseScreen);
 		Board.startGame();
@@ -189,6 +169,10 @@ public class MainGame {
 	
 	public static Audio getBGM() {
 		return BGM;
+	}
+	
+	public static JFrame getGameWindow() {
+		return GameWindow;
 	}
 
 	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {

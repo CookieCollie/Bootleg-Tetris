@@ -21,7 +21,7 @@ public class Title extends JPanel implements MouseListener, MouseMotionListener{
     /**
      *
      */
-    private static final long serialVersionUID = 1L;
+    //private static final long serialVersionUID = 1L;
     private int mouseX, mouseY;
     private Rectangle bounds;
     private boolean leftClick = false;

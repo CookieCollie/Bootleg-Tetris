@@ -59,14 +59,6 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 			Block5 = ImageIO.read(new File("resources/T.png"));
 			Block6 = ImageIO.read(new File("resources/O.png"));
 
-			/*Block0 = ImageIO.read(GridBoard.class.getResourceAsStream("/0.png"));
-			Block1 = ImageIO.read(GridBoard.class.getResourceAsStream("/1.png"));
-			Block2 = ImageIO.read(GridBoard.class.getResourceAsStream("/2.png"));
-			Block3 = ImageIO.read(GridBoard.class.getResourceAsStream("/3.png"));
-			Block4 = ImageIO.read(GridBoard.class.getResourceAsStream("/4.png"));
-			Block5 = ImageIO.read(GridBoard.class.getResourceAsStream("/5.png"));
-			Block6 = ImageIO.read(GridBoard.class.getResourceAsStream("/6.png"));*/
-
 			// Test
 			blocks = ImageIO.read(new File("resources/Block.png"));
 			BGPg = ImageIO.read(new File("resources/BGPicture.png"));
@@ -93,22 +85,6 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		});
 
 		GameLoop.start();
-
-		// Shapes
-//		Shape[0] = new FormBlock(Block0.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), new int[][] { { 1, 1, 1, 1 } },
-//				this, 1); // I
-//		Shape[1] = new FormBlock(Block1.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0), new int[][] { { 1, 1 }, { 1, 1 } },
-//				this, 2); // O
-//		Shape[2] = new FormBlock(Block2.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
-//				new int[][] { { 0, 0, 1 }, { 1, 1, 1 } }, this, 3); // L
-//		Shape[3] = new FormBlock(Block3.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
-//				new int[][] { { 1, 1, 1 }, { 0, 0, 1 } }, this, 4); // J
-//		Shape[4] = new FormBlock(Block4.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
-//				new int[][] { { 0, 1, 1 }, { 1, 1, 0 } }, this, 5); // S
-//		Shape[5] = new FormBlock(Block5.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
-//				new int[][] { { 1, 1, 0 }, { 0, 1, 1 } }, this, 6); // Z
-//		Shape[6] = new FormBlock(Block6.getScaledInstance(BLOCKSIZE, BLOCKSIZE, 0),
-//				new int[][] { { 1, 1, 1 }, { 0, 1, 0 } }, this, 7); // T
 
 		Shape[0] = new FormBlock(blocks.getSubimage(0, 0, BLOCKSIZE, BLOCKSIZE), new int[][] { { 1, 1, 1, 1 } // I shape
 		}, this, 1);
@@ -155,8 +131,6 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		for (int x=0; x<GRID.length; x++) {
 			for (int y=0; y<GRID[x].length; y++) {
 				if (GRID[x][y] != 0) {
-					//Draw.drawImage((Blocks[GRID[x][y]-1]).getScaledInstance(BLOCKSIZE, BLOCKSIZE, Image.SCALE_SMOOTH), y*BLOCKSIZE, x*BLOCKSIZE, null);
-
 					//Test
 					Draw.drawImage(blocks.getSubimage((GRID[x][y] - 1)*BLOCKSIZE, 0, BLOCKSIZE, BLOCKSIZE), y*BLOCKSIZE, BLOCKSIZE*x, null);
 				}
@@ -176,10 +150,11 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		
 		//Draw pause menu background
 		if (pause) {
-			Draw.drawImage(blocks, 0, 0, 100, 100, 0, 0, 100, 100, null);
+			//Draw.drawImage(blocks, 0, 0, 100, 100, 0, 0, 100, 100, null);
+			
+			Draw.drawString("GAME PAUSE", (MainGame.WIDTH)/2, 100);
 //			Draw.setColor(Color.WHITE);
 //			Draw.setFont(new Font("Georgia", Font.BOLD, 50));
-//			Draw.drawString("GAME PAUSE", (MainGame.WIDTH)/2, MainGame.HEIGHT/2);
 		}
 		
 		Draw.drawLine(BLOCKSIZE*COLUMNS, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS);
@@ -204,9 +179,9 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 
 	public void blockUpdate() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		if (gameOver) {
-			MainGame.getBGM().stopBGM();
+			MainGame.getBGM().stopMusic();
 			audio = new Audio("audio/FAILURE NOTIFICATION.wav");
-			audio.playBGMDelay();
+			audio.playMusicDelay();
 			GameLoop.stop();
 		}
 		else
@@ -320,13 +295,13 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 			pause = !pause;
 			if (pause) {
 				PauseScreen.drawPauseScreen();
-				MainGame.getBGM().pauseBGM();
+				MainGame.getBGM().pauseMusic();
 				GameLoop.stop();
 			}
 			else {
 				PauseScreen.removePauseScreen();
 				try {
-					MainGame.getBGM().resumeBGM();
+					MainGame.getBGM().resumeMusic();
 				} catch (UnsupportedAudioFileException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

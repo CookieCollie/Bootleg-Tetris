@@ -29,9 +29,6 @@ public class FormBlock {
 		this.BlockCoordinates = BlockCoordinates;
 		this.GridBoard = GridBoard;
 		this.color = color;
-		
-//		x = GridBoard.getCOLUMNS()/2-1;
-//		y = -1;
 
         // Starting position
         x = GridBoard.getCOLUMNS()/2-1;;
@@ -39,8 +36,7 @@ public class FormBlock {
 
 		CurrentTime = 0;
 		PassedTime = System.currentTimeMillis();
-		Speed = Difficulty.changeDifficulty(); // Implement speed/difficulty change in future
-					 // The smaller the number, the faster the blocks move
+		Speed = Difficulty.changeDifficulty(); // The smaller the number, the faster the blocks move
 		SpeedBoost = 0;
 		CurrentSpeed = Speed;
 	}
@@ -62,7 +58,7 @@ public class FormBlock {
 		}
 		
 		
-		if (!(x + XShift + BlockCoordinates[0].length > 10) && !(x + XShift < 0)) { // 10 is Gridboard's column
+		if (!(x + XShift + BlockCoordinates[0].length > GridBoard.COLUMNS) && !(x + XShift < 0)) {
 		    for (int row = 0; row < BlockCoordinates.length; row++) {
                 for (int col = 0; col < BlockCoordinates[row].length; col++) {
                     if(BlockCoordinates[row][col] != 0){
@@ -78,7 +74,7 @@ public class FormBlock {
 		}
 		
 		
-		if (!(y+BlockCoordinates.length+1 > GridBoard.ROWS)) { // 20 is gridboard's row
+		if (!(y+BlockCoordinates.length+1 > GridBoard.ROWS)) {
 			for (int i=0; i<BlockCoordinates.length; i++) {
 				for (int j=0; j<BlockCoordinates[i].length; j++) { 
 					if (BlockCoordinates[i][j] != 0) {
@@ -110,12 +106,11 @@ public class FormBlock {
 					 count++;
 				 }
 				 GridBoard.getGrid()[height][j] = GridBoard.getGrid()[i][j];
-				 //System.out.print(GridBoard.getGrid()[height][j]);
 			 }
 			 if (count==GridBoard.COLUMNS) {
 			 	scoreFB += 10;
 			 	audio = new Audio("audio/OPEN GAME.wav");
-			 	audio.playBGMDelay();
+			 	audio.playMusicDelay();
 			 }
 			 if (count<GridBoard.getGrid()[0].length) {
 				 height--;
