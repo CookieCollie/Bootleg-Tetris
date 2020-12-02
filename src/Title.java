@@ -57,8 +57,6 @@ public class Title extends JPanel implements MouseListener, MouseMotionListener{
         bounds = new Rectangle((mainGame.WIDTH+120)/2 - 50, mainGame.HEIGHT/2 - 100, 100, 80);
         this.mainGame = mainGame;
 
-
-
     }
 
     public void paintComponent(Graphics g){
