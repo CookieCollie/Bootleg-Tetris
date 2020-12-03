@@ -54,7 +54,7 @@ public class Title extends JPanel implements MouseListener, MouseMotionListener{
         playButton[0] = play.getSubimage(0, 0, 100, 80);
         playButton[1] = play.getSubimage(100, 0, 100, 80);
 
-        bounds = new Rectangle((mainGame.WIDTH+120)/2 - 50, mainGame.HEIGHT/2 - 100, 100, 80);
+        bounds = new Rectangle((mainGame.WIDTH+120)/2 - 50, mainGame.HEIGHT/2 - 75, 110, 90);
         this.mainGame = mainGame;
 
     }
