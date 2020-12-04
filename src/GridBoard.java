@@ -39,7 +39,8 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 	private int delay = 1000 / FPS;
 	private static Timer GameLoop;
 	
-	private static boolean gameOver = false, pause = false, gridOn = true;
+	private static boolean gameOver = false, gridOn = true;
+	private boolean pause = false;
 	
 	private static GridBoard boardSingle = null;
 	
@@ -48,6 +49,8 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 	private int[] combination = new int[4];
 	private int[] compareComb = {4,3,1,2};
 	private int combCounter = -1;
+
+	//private HighScore highScore = new HighScore();
 
 	public GridBoard() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		try {
@@ -150,12 +153,10 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		
 		//Draw pause menu background
 		if (pause) {
-			//Draw.drawImage(blocks, 0, 0, 100, 100, 0, 0, 100, 100, null);
-			
-			Draw.drawString("GAME PAUSE", (MainGame.WIDTH)/2, 100);
-//			Draw.setColor(Color.WHITE);
-//			Draw.setFont(new Font("Georgia", Font.BOLD, 50));
-		}
+            Draw.drawImage(blocks, 0, 0, 100, 100, 0, 0, 100, 100, null);
+            GameLoop.stop();
+            System.out.println("Pause in Draw GridBoard");
+        }
 		
 		Draw.drawLine(BLOCKSIZE*COLUMNS, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS);
 
@@ -164,8 +165,15 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		Draw.drawString("Difficulty: " + Difficulty.getPrintDiff(), BLOCKSIZE*COLUMNS+10, 40);
 		
 		Draw.drawLine(BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS/2, 2000, BLOCKSIZE*ROWS/2);
+
+//		try {
+//			Draw.drawString("Highest scores: " + highScore.compareScore(FormBlock.getScoreFB()), BLOCKSIZE*COLUMNS+10, BLOCKSIZE*ROWS/2+20);
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+
 		Draw.drawString("Highest scores: ", BLOCKSIZE*COLUMNS+10, BLOCKSIZE*ROWS/2+20);
-		
+
 		if (currBlock != 0 && currBlock != 6) {
 			Draw.drawImage(Blocks[currBlock], BLOCKSIZE*COLUMNS+30, 150, BLOCKSIZE*COLUMNS+30+90, 210, 0, 0, 90, 60, null);
 		}
@@ -227,12 +235,6 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		for (int i=0; i<GRID.length; i++) {
 			Arrays.fill(GRID[i], 0);
 		}
-		
-//		for(int row = 0; row < (GRID.length); row++) {
-//			for(int col = 0; col < (GRID[row].length); col ++) {
-//				GRID[row][col] = 0;
-//			}
-//		}
 	}
 
 	public void stopGame(){
@@ -297,28 +299,8 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 			}
 		}
 		if (e.getKeyCode() == KeyEvent.VK_P) {
-			pause = !pause;
-			if (pause) {
-				PauseScreen.drawPauseScreen();
-				MainGame.getBGM().pauseMusic();
-				GameLoop.stop();
-			}
-			else {
-				PauseScreen.removePauseScreen();
-				try {
-					MainGame.getBGM().resumeMusic();
-				} catch (UnsupportedAudioFileException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (LineUnavailableException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				GameLoop.start();
-			}
+		    pause = !pause;
+            setPause(pause);
 		}
 		if (e.getKeyCode() == KeyEvent.VK_E) {
 			gridOn = !gridOn;
@@ -357,12 +339,32 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		return BLOCKSIZE;
 	}
 	
-	public static boolean getPause() {
+	public boolean getPause() {
 		return pause;
 	}
 	
-	public static void setPause(boolean pause) {
-		GridBoard.pause = pause;
+	public void setPause(boolean pause) {
+		this.pause = pause;
+        if(pause) {
+            PauseScreen.drawPauseScreen();
+            MainGame.getBGM().pauseMusic();
+            //GameLoop.stop(); // When GameLoop stops, we cannot draw anything
+        } else {
+            PauseScreen.removePauseScreen();
+            try {
+                MainGame.getBGM().resumeMusic();
+            } catch (UnsupportedAudioFileException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            } catch (LineUnavailableException e1) {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+            }
+            GameLoop.start();
+        }
 	}
 	
 	public static Timer getGameLoop() {

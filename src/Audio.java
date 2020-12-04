@@ -41,8 +41,7 @@ public class Audio {
 	}
 	
 	public void resumeMusic() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-		music.close();
-		resetAudioStream(filePath);
+		//resetAudioStream(filePath);
 		music.setMicrosecondPosition(currFrame);
 		this.playMusic();
 	}
@@ -50,7 +49,7 @@ public class Audio {
 	public void stopMusic() {
 		currFrame = 0L;
 		music.stop();
-		music.close();
+		//music.close();
 	}
 	
 	public void resetAudioStream(String filePath) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
