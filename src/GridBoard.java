@@ -156,7 +156,7 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		if (pause) {
             Draw.drawImage(blocks, 0, 0, 100, 100, 0, 0, 100, 100, null);
             GameLoop.stop();
-            System.out.println("Pause in Draw GridBoard");
+            //System.out.println("Pause in Draw GridBoard");
         }
 		
 		Draw.drawLine(BLOCKSIZE*COLUMNS, 0, BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS);
@@ -211,7 +211,7 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 			}
 		}
 		currBlock = rand.nextInt(7);
-		System.out.println(currBlock);
+		//System.out.println(currBlock);
 		
 		
 		if (checkComb()) {

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Bootleg-Tetris:jar">
+    <output-path>$PROJECT_DIR$</output-path>
+    <root id="archive" name="Bootleg-Tetris.jar">
+      <element id="module-output" name="Bootleg-Tetris" />
+    </root>
+  </artifact>
+</component>
