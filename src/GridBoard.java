@@ -4,6 +4,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.AttributedCharacterIterator;
 import java.util.Random;
@@ -50,7 +51,7 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 	private int[] compareComb = {4,3,1,2};
 	private int combCounter = -1;
 
-	//private HighScore highScore = new HighScore();
+	private HighScore highScore = new HighScore();
 
 	public GridBoard() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		try {
@@ -166,13 +167,11 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		
 		Draw.drawLine(BLOCKSIZE*COLUMNS, BLOCKSIZE*ROWS/2, 2000, BLOCKSIZE*ROWS/2);
 
-//		try {
-//			Draw.drawString("Highest scores: " + highScore.compareScore(FormBlock.getScoreFB()), BLOCKSIZE*COLUMNS+10, BLOCKSIZE*ROWS/2+20);
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-
-		Draw.drawString("Highest scores: ", BLOCKSIZE*COLUMNS+10, BLOCKSIZE*ROWS/2+20);
+		try {
+			Draw.drawString("Highest scores: " + highScore.compareScore(FormBlock.getScoreFB()), BLOCKSIZE*COLUMNS+10, BLOCKSIZE*ROWS/2+20);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
 		if (currBlock != 0 && currBlock != 6) {
 			Draw.drawImage(Blocks[currBlock], BLOCKSIZE*COLUMNS+30, 150, BLOCKSIZE*COLUMNS+30+90, 210, 0, 0, 90, 60, null);

@@ -1,32 +1,38 @@
-//import java.io.FileWriter;
-//import java.io.IOException;
-//import java.io.File;
-//import java.util.Scanner;
-//
-//
-//public class HighScore {
-//    Scanner scanner;
-//    private int highScore;
-//
-//    public HighScore() {
-//    }
-//
-//    public int compareScore(int score) throws IOException {
-//        scanner = new Scanner(new File("HighScore.txt"));
-//        while (scanner.hasNext()) {
-//            System.out.println(scanner.nextInt());
-//            highScore = Integer.parseInt(scanner.next());
-//            if (score > highScore) {
-//                highScore = score;
-//            }
-//        }
-//        try (FileWriter writer = new FileWriter("HighScore.txt")) {
-//            writer.flush();
-//            writer.write(highScore);
-//            writer.close();
-//        } catch (IOException ioEx) {
-//            ioEx.printStackTrace();
-//        }
-//        return highScore;
-//    }
-//}
+import java.io.*;
+
+public class HighScore {
+    private int highScore;
+
+    public HighScore() throws IOException {
+    }
+
+    public int compareScore(int score) throws IOException {
+        highScore = readLong("resources/HighScore.txt",-1);
+        if (score > highScore) {
+            highScore = score;
+        }
+        writeLong("resources/HighScore.txt",highScore);
+        return highScore;
+    }
+
+    public static void writeLong(String filename, int number) throws IOException {
+        try (FileWriter dos = new FileWriter(filename)) {
+            PrintWriter pw = new PrintWriter(dos);
+
+            pw.write(number);
+            pw.write("\n");
+            pw.close();
+        }
+    }
+
+    public static int readLong(String filename, int valueIfNotFound) {
+        if (!new File(filename).canRead()) return valueIfNotFound;
+
+        try (DataInputStream dis = new DataInputStream(new FileInputStream(filename))) {
+            int result = Integer.parseInt(String.valueOf(dis.read()));
+            return result;
+        } catch (IOException ignored) {
+            return valueIfNotFound;
+        }
+    }
+}
