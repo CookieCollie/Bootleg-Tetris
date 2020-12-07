@@ -7,15 +7,15 @@ public class HighScore {
     }
 
     public int compareScore(int score) throws IOException {
-        highScore = readLong("resources/HighScore.txt",-1);
+        highScore = readScore("resources/HighScore.txt",-1);
         if (score > highScore) {
             highScore = score;
         }
-        writeLong("resources/HighScore.txt",highScore);
+        writeScore("resources/HighScore.txt",highScore);
         return highScore;
     }
 
-    public static void writeLong(String filename, int number) throws IOException {
+    public void writeScore(String filename, int number) throws IOException {
         try (FileWriter dos = new FileWriter(filename)) {
             PrintWriter pw = new PrintWriter(dos);
 
@@ -25,7 +25,7 @@ public class HighScore {
         }
     }
 
-    public static int readLong(String filename, int valueIfNotFound) {
+    public int readScore(String filename, int valueIfNotFound) {
         if (!new File(filename).canRead()) return valueIfNotFound;
 
         try (DataInputStream dis = new DataInputStream(new FileInputStream(filename))) {
