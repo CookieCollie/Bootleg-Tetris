@@ -44,8 +44,17 @@ public class MainGame {
 		gameItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Board.startGame();
-				BGM.playMusic();
+				BGM.stopMusic();
 				menuBar.revalidate();
+				try {
+					BGM.resumeMusic();
+				} catch (UnsupportedAudioFileException unsupportedAudioFileException) {
+					unsupportedAudioFileException.printStackTrace();
+				} catch (IOException ioException) {
+					ioException.printStackTrace();
+				} catch (LineUnavailableException lineUnavailableException) {
+					lineUnavailableException.printStackTrace();
+				}
 			}
 		});
 		game.add(gameItem);
@@ -62,28 +71,6 @@ public class MainGame {
 				boolean pause = Board.getPause();
 				pause = !pause;
 				Board.setPause(pause);
-
-				if (pause) {
-					PauseScreen.drawPauseScreen();
-					BGM.pauseMusic();
-					Board.getGameLoop().stop();
-				}
-				else {
-					PauseScreen.removePauseScreen();
-					try {
-						BGM.resumeMusic();
-					} catch (UnsupportedAudioFileException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					} catch (LineUnavailableException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					Board.getGameLoop().start();
-				}
 			}
 		});
 		game.add(gameItem);
