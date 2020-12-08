@@ -25,7 +25,7 @@ public class Title extends JPanel implements MouseListener, MouseMotionListener{
     private int mouseX, mouseY;
     private Rectangle bounds;
     private boolean leftClick = false;
-    private BufferedImage title, instructions, play;
+    private BufferedImage title, instructions, play, bg;
     private MainGame mainGame;
     private BufferedImage[] playButton = new BufferedImage[2];
     private Timer timer;
@@ -36,6 +36,7 @@ public class Title extends JPanel implements MouseListener, MouseMotionListener{
             title = ImageIO.read(new File("resources/Title.png"));
             instructions = ImageIO.read(new File("resources/arrow.png"));
             play = ImageIO.read(new File("resources/play.png"));
+            bg = ImageIO.read(new File("resources/menu-bg.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -74,9 +75,10 @@ public class Title extends JPanel implements MouseListener, MouseMotionListener{
             }
         }
 
-        g.setColor(Color.BLACK);
+        //g.setColor(Color.getHSBColor(46, 25, 100));
 
-        g.fillRect(0, 0, mainGame.WIDTH + 120, mainGame.HEIGHT);
+        //g.fillRect(0, 0, mainGame.WIDTH + 120, mainGame.HEIGHT);
+        g.drawImage(bg, 0, 0, 336+120, 660, 0, 0, 336, 660, null);
 
         g.drawImage(title, (mainGame.WIDTH+120)/2 - title.getWidth()/2, MainGame.HEIGHT/2 - title.getHeight()/2 - 200, null);
         g.drawImage(instructions, (mainGame.WIDTH+120)/2 - instructions.getWidth()/2,

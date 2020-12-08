@@ -24,7 +24,7 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 
 	Audio audio;
 
-	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6, blocks, BGPg;
+	private BufferedImage Block0, Block1, Block2, Block3, Block4, Block5, Block6, blocks, BGPg, pauseMenu;
 
 	public final static int COLUMNS = 10, ROWS = 20, BLOCKSIZE = 30;
 	public int[][] GRID = new int[ROWS][COLUMNS];
@@ -66,6 +66,7 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 			// Test
 			blocks = ImageIO.read(new File("resources/Block.png"));
 			BGPg = ImageIO.read(new File("resources/BGPicture.png"));
+			pauseMenu = ImageIO.read(new File("resources/pause.png"));
 
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -154,7 +155,7 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		
 		//Draw pause menu background
 		if (pause) {
-            Draw.drawImage(blocks, 0, 0, 100, 100, 0, 0, 100, 100, null);
+            Draw.drawImage(pauseMenu, 0, -100, 336, 660, 0, 0, 336, 660, null);
             GameLoop.stop();
             //System.out.println("Pause in Draw GridBoard");
         }
@@ -345,11 +346,11 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 	public void setPause(boolean pause) {
 		this.pause = pause;
         if(pause) {
-            PauseScreen.drawPauseScreen();
+            //PauseScreen.drawPauseScreen();
             MainGame.getBGM().pauseMusic();
             //GameLoop.stop(); // When GameLoop stops, we cannot draw anything
         } else {
-            PauseScreen.removePauseScreen();
+           // PauseScreen.removePauseScreen();
             try {
                 MainGame.getBGM().resumeMusic();
             } catch (UnsupportedAudioFileException e1) {
