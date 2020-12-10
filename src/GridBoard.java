@@ -15,7 +15,7 @@ import java.util.Arrays;
 
 public class GridBoard extends JPanel implements KeyListener, MouseMotionListener, MouseListener {
 
-	String PicBGPath = "resources/BGPicture.png";
+	String PicBGPath = "resources/BGP.png";
 
 	private boolean leftClick = false;
 
