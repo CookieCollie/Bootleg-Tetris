@@ -22,7 +22,7 @@ public class MainGame {
 	private static Audio BGM;
 
 	private Title title;
-	private GridBoard Board = new GridBoard();
+	private GridBoard Board = GridBoard.getInstance();
 
 	public MainGame() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
 		BGM = new Audio("audio/NyanCatOriginal-DangCapNhat_4237d_hq.wav");
@@ -141,7 +141,7 @@ public class MainGame {
 		GameWindow.setVisible(true);
 	}
 
-	public void startTetris() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public void startTetris() {
 		GameWindow.remove(title);
 		GameWindow.addMouseMotionListener(Board);
 		GameWindow.addMouseListener(Board);

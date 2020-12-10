@@ -64,15 +64,7 @@ public class Title extends JPanel implements MouseListener, MouseMotionListener{
         super.paintComponent(g);
 
         if(leftClick && bounds.contains(mouseX, mouseY)) {
-            try {
-                mainGame.startTetris();
-            } catch (UnsupportedAudioFileException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (LineUnavailableException e) {
-                e.printStackTrace();
-            }
+            mainGame.startTetris();
         }
 
         //g.setColor(Color.getHSBColor(46, 25, 100));

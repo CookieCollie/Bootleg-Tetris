@@ -25,10 +25,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db0c011f-4f45-4610-bfb1-0cd0cfafec8a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Bootleg-Tetris.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/HighScore.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/HighScore.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/GridBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GridBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/MainGame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/MainGame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Title.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Title.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -161,42 +162,42 @@
     </state>
     <state x="434" y="124" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1606218771766" />
     <state x="463" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1607331043374" />
-    <state width="1322" height="128" key="GridCell.Tab.0.bottom" timestamp="1607332657580">
+    <state width="1322" height="128" key="GridCell.Tab.0.bottom" timestamp="1607570733589">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1237" height="166" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1606210281063" />
-    <state width="1322" height="128" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1607332657580" />
-    <state width="1322" height="128" key="GridCell.Tab.0.center" timestamp="1607332657579">
+    <state width="1322" height="128" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1607570733589" />
+    <state width="1322" height="128" key="GridCell.Tab.0.center" timestamp="1607570733589">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1237" height="166" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1606210281063" />
-    <state width="1322" height="128" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1607332657579" />
-    <state width="1322" height="128" key="GridCell.Tab.0.left" timestamp="1607332657579">
+    <state width="1322" height="128" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1607570733589" />
+    <state width="1322" height="128" key="GridCell.Tab.0.left" timestamp="1607570733589">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1237" height="166" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1606210281063" />
-    <state width="1322" height="128" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1607332657579" />
-    <state width="1322" height="128" key="GridCell.Tab.0.right" timestamp="1607332657580">
+    <state width="1322" height="128" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1607570733589" />
+    <state width="1322" height="128" key="GridCell.Tab.0.right" timestamp="1607570733589">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1237" height="166" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1606210281063" />
-    <state width="1322" height="128" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1607332657580" />
-    <state width="1322" height="231" key="GridCell.Tab.1.bottom" timestamp="1607310269923">
+    <state width="1322" height="128" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1607570733589" />
+    <state width="1322" height="231" key="GridCell.Tab.1.bottom" timestamp="1607568539725">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="231" key="GridCell.Tab.1.bottom/0.0.1366.768@0.0.1366.768" timestamp="1607310269923" />
-    <state width="1322" height="231" key="GridCell.Tab.1.center" timestamp="1607310269923">
+    <state width="1322" height="231" key="GridCell.Tab.1.bottom/0.0.1366.768@0.0.1366.768" timestamp="1607568539725" />
+    <state width="1322" height="231" key="GridCell.Tab.1.center" timestamp="1607568539725">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="231" key="GridCell.Tab.1.center/0.0.1366.768@0.0.1366.768" timestamp="1607310269923" />
-    <state width="1322" height="231" key="GridCell.Tab.1.left" timestamp="1607310269923">
+    <state width="1322" height="231" key="GridCell.Tab.1.center/0.0.1366.768@0.0.1366.768" timestamp="1607568539725" />
+    <state width="1322" height="231" key="GridCell.Tab.1.left" timestamp="1607568539725">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="231" key="GridCell.Tab.1.left/0.0.1366.768@0.0.1366.768" timestamp="1607310269923" />
-    <state width="1322" height="231" key="GridCell.Tab.1.right" timestamp="1607310269923">
+    <state width="1322" height="231" key="GridCell.Tab.1.left/0.0.1366.768@0.0.1366.768" timestamp="1607568539725" />
+    <state width="1322" height="231" key="GridCell.Tab.1.right" timestamp="1607568539725">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
-    <state width="1322" height="231" key="GridCell.Tab.1.right/0.0.1366.768@0.0.1366.768" timestamp="1607310269923" />
+    <state width="1322" height="231" key="GridCell.Tab.1.right/0.0.1366.768@0.0.1366.768" timestamp="1607568539725" />
     <state x="163" y="0" key="SettingsEditor" timestamp="1607331049334">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
@@ -225,29 +226,10 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/HighScore.java</url>
-          <line>8</line>
-          <properties class="HighScore" method="compareScore">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="11" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/HighScore.java</url>
-          <line>27</line>
-          <properties class="HighScore" method="readLong">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/HighScore.java</url>
-          <line>17</line>
-          <properties class="HighScore" method="writeLong">
-            <option name="EMULATED" value="true" />
-          </properties>
-          <option name="timeStamp" value="13" />
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/MainGame.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="14" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
