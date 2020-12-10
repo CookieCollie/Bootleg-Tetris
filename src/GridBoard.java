@@ -62,7 +62,7 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 
 			// Test
 			blocks = ImageIO.read(new File("resources/Block.png"));
-			BGPg = ImageIO.read(new File("resources/BGPicture.png"));
+			BGPg = ImageIO.read(new File("resources/BGP.png"));
 			pauseMenu = ImageIO.read(new File("resources/pause.png"));
 
 		} catch (IOException e) {
