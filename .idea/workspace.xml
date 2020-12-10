@@ -25,12 +25,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bcbaf779-396a-4aa0-985c-75144dfc6eac" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/artifacts/Bootleg_Tetris_jar.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bootleg-Tetris.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Bootleg-Tetris.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Play.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/Explosion+5-EXPLOSION.mp3" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/FAILURE NOTIFICATION.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/audio/NyanCatOriginal-DangCapNhat_4237d_hq.wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/OPEN - CLOSE GAME.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/OPEN GAME.wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/Tick Tock-TIME'S UP.mp3" beforeDir="false" />
@@ -38,23 +36,8 @@
       <change beforePath="$PROJECT_DIR$/audio/bottle_pop_2-POP-CHANGE.wav" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/coin_6-CHANGE.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/audio/dropping-2- BREAK.wav" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/BGP.png" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/BGPicture.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Block.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/HighScore.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/I.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/J.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/L.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/O.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/S.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/T.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Title.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/Z.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/arrow.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/menu-bg.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/pause.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/play.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/GridBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GridBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/HighScore.txt" beforeDir="false" afterPath="$PROJECT_DIR$/resources/HighScore.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +99,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="db0c011f-4f45-4610-bfb1-0cd0cfafec8a" name="Default Changelist" comment="" />
+      <changelist id="bcbaf779-396a-4aa0-985c-75144dfc6eac" name="Default Changelist" comment="" />
       <created>1603777870655</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -190,26 +173,26 @@
     </state>
     <state x="434" y="124" key="FileChooserDialogImpl/0.0.1280.689@0.0.1280.689" timestamp="1606218771766" />
     <state x="463" y="138" key="FileChooserDialogImpl/0.0.1366.768@0.0.1366.768" timestamp="1607576011351" />
-    <state width="1322" height="192" key="GridCell.Tab.0.bottom" timestamp="1607575266212">
+    <state width="1322" height="128" key="GridCell.Tab.0.bottom" timestamp="1607578578944">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1237" height="166" key="GridCell.Tab.0.bottom/0.0.1280.689@0.0.1280.689" timestamp="1606545578926" />
-    <state width="1322" height="192" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1607575266212" />
-    <state width="1322" height="192" key="GridCell.Tab.0.center" timestamp="1607575266211">
+    <state width="1322" height="128" key="GridCell.Tab.0.bottom/0.0.1366.768@0.0.1366.768" timestamp="1607578578944" />
+    <state width="1322" height="128" key="GridCell.Tab.0.center" timestamp="1607578578943">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1237" height="166" key="GridCell.Tab.0.center/0.0.1280.689@0.0.1280.689" timestamp="1606545578926" />
-    <state width="1322" height="192" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1607575266211" />
-    <state width="1322" height="192" key="GridCell.Tab.0.left" timestamp="1607575266211">
+    <state width="1322" height="128" key="GridCell.Tab.0.center/0.0.1366.768@0.0.1366.768" timestamp="1607578578943" />
+    <state width="1322" height="128" key="GridCell.Tab.0.left" timestamp="1607578578943">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1237" height="166" key="GridCell.Tab.0.left/0.0.1280.689@0.0.1280.689" timestamp="1606545578926" />
-    <state width="1322" height="192" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1607575266211" />
-    <state width="1322" height="192" key="GridCell.Tab.0.right" timestamp="1607575266212">
+    <state width="1322" height="128" key="GridCell.Tab.0.left/0.0.1366.768@0.0.1366.768" timestamp="1607578578943" />
+    <state width="1322" height="128" key="GridCell.Tab.0.right" timestamp="1607578578944">
       <screen x="0" y="0" width="1366" height="768" />
     </state>
     <state width="1237" height="166" key="GridCell.Tab.0.right/0.0.1280.689@0.0.1280.689" timestamp="1606545578926" />
-    <state width="1322" height="192" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1607575266212" />
+    <state width="1322" height="128" key="GridCell.Tab.0.right/0.0.1366.768@0.0.1366.768" timestamp="1607578578944" />
     <state width="1322" height="234" key="GridCell.Tab.1.bottom" timestamp="1606061086738">
       <screen x="0" y="0" width="1366" height="768" />
     </state>

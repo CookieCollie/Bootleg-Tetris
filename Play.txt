@@ -1,2 +1,0 @@
-java -jar Bootleg-Tetris.jar
-exit
