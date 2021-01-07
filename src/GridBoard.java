@@ -15,8 +15,6 @@ import java.util.Arrays;
 
 public class GridBoard extends JPanel implements KeyListener, MouseMotionListener, MouseListener {
 
-	String PicBGPath = "resources/BGP.png";
-
 	private boolean leftClick = false;
 
 	Audio audio;
@@ -31,7 +29,6 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 	private FormBlock CurrentShape;
 
 	private Random rand = new Random();
-	int RandomNum = rand.nextInt(7);
 
 	private int FPS = 60;
 	private int delay = 1000 / FPS;
@@ -50,7 +47,7 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 
 	private HighScore highScore = new HighScore();
 
-	private GridBoard() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	private GridBoard() throws IOException {
 		try {
 			Block0 = ImageIO.read(new File("resources/I.png"));
 			Block1 = ImageIO.read(new File("resources/Z.png"));
@@ -112,7 +109,7 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		SpawnNextBlock();
 	}
 
-	public static GridBoard getInstance() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
+	public static GridBoard getInstance() throws IOException {
 		if (boardSingle == null) {
 			boardSingle = new GridBoard();
 		}
@@ -181,7 +178,6 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 				Draw.drawImage(Block0, BLOCKSIZE*COLUMNS+10, 150, BLOCKSIZE*COLUMNS+10+120, 180, 0, 0, 120, 30, null);
 			else
 				Draw.drawImage(Block6, BLOCKSIZE*COLUMNS+30, 150, BLOCKSIZE*COLUMNS+30+60, 210, 0, 0, 60, 60, null);
-		//PauseScreen.drawPauseScreen();
 	}
 
 	public void blockUpdate() throws UnsupportedAudioFileException, IOException, LineUnavailableException {
@@ -228,7 +224,6 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 		combCounter = -1;
 		GameLoop.start();
 		FormBlock.setScoreFB(0);
-		//Arrays.fill(GRID, 0);
 		pause = false;
 		
 		for (int i=0; i<GRID.length; i++) {
@@ -345,21 +340,16 @@ public class GridBoard extends JPanel implements KeyListener, MouseMotionListene
 	public void setPause(boolean pause) {
 		this.pause = pause;
         if(pause) {
-            //PauseScreen.drawPauseScreen();
             MainGame.getBGM().pauseMusic();
             //GameLoop.stop(); // When GameLoop stops, we cannot draw anything
         } else {
-           // PauseScreen.removePauseScreen();
             try {
                 MainGame.getBGM().resumeMusic();
             } catch (UnsupportedAudioFileException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             } catch (IOException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             } catch (LineUnavailableException e1) {
-                // TODO Auto-generated catch block
                 e1.printStackTrace();
             }
             GameLoop.start();

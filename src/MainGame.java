@@ -10,12 +10,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
 public class MainGame {
-	public static boolean newGame = false;
-//	public static final int WIDTH = GridBoard.getCOLUMNS() * GridBoard.getBLOCKSIZE(),
-//			HEIGHT = GridBoard.getROWS() * GridBoard.getBLOCKSIZE() + (GridBoard.getROWS()+10) * 2;
 	public static final int WIDTH = 336, HEIGHT = 660;
 	
-	private static JMenuBar menuBar = new JMenuBar();;
+	private static JMenuBar menuBar = new JMenuBar();
 	private JMenu game = new JMenu("Game");
 	private JMenuItem gameItem = new JMenuItem("Restart");
 	private static JFrame GameWindow = new JFrame("Bootleg Tetris");
@@ -97,7 +94,6 @@ public class MainGame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Difficulty.setDifficulty(0);
-				//FormBlock.setSpeed(Difficulty.changeDifficulty());
 				FormBlock.setCurrentSpeed(Difficulty.changeDifficulty());
 			}
 		});
@@ -109,7 +105,6 @@ public class MainGame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Difficulty.setDifficulty(1);
-				//FormBlock.setSpeed(Difficulty.changeDifficulty());
 				FormBlock.setCurrentSpeed(Difficulty.changeDifficulty());
 			}
 		});
@@ -121,7 +116,6 @@ public class MainGame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Difficulty.setDifficulty(2);
-				//FormBlock.setSpeed(Difficulty.changeDifficulty());
 				FormBlock.setCurrentSpeed(Difficulty.changeDifficulty());
 			}
 		});
@@ -149,17 +143,12 @@ public class MainGame {
 		GameWindow.addKeyListener(Board);
 		
 		GameWindow.setJMenuBar(menuBar);
-		//GameWindow.add(PauseScreen.pauseScreen);
 		Board.startGame();
 		GameWindow.revalidate();
 	}
 	
 	public static Audio getBGM() {
 		return BGM;
-	}
-	
-	public static JFrame getGameWindow() {
-		return GameWindow;
 	}
 
 	public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {

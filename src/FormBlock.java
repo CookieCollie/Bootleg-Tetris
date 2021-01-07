@@ -203,10 +203,6 @@ public class FormBlock {
 		FormBlock.scoreFB = scoreFB;
 	}
 	
-	public static void setSpeed(int speed) {
-		Speed = speed;
-	}
-	
 	public static void setCurrentSpeed(int currentSpeed) {
 		CurrentSpeed = currentSpeed;
 	}
