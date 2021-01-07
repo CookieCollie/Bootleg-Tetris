@@ -1,13 +1,11 @@
 # Purpose of existence
 This is an attempt to clone the famous Tetris game. It serves as the final project for our OOP course in HCMIU-VN.
 
-Here is our Report
-
 # Dependencies
 - Java Development Kit 11
 
 # Download
-Download the latest release and extract it, which contains 3 things:
+Download the latest release and extract it, which contains 4 things:
 
 - Resources
 - Audio
